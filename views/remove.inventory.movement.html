@@ -1,0 +1,39 @@
+
+ <div class="row">
+        <div class="col-md-12">
+          <h1>Retirer du stock</h1>
+        </div>
+ </div>
+
+      <div class="row" ui-view>
+      <div class="col-md-12" style="padding: 20px;">
+      
+        <button class="btn" ng-click="ctrl.clear()"> Nouveau.. </button>
+        <button class="btn" ng-click="ctrl.add()" ng-disabled="item.ArticleId === undefined || item.ArticleId === '' || item.quantite === undefined || item.quantite === '' "> Enregistrer </button>
+
+      </div>
+        <div class="col-md-12"> 
+
+            <label> Article</label>
+            </br>
+            <input class="form-control" type="text"  ng-model="item.ArticleId"  placeholder="ID d'article"/>
+
+            <a class="btn btn-primary" ui-sref="inventory.outmove.articleSelect">Sélectionner..</a></br><br>
+
+            
+
+            <label>Quantité </label>
+            <input class="form-control" type="text"  ng-model="item.quantite"  placeholder="entrez la quantité"/>
+            <label>Raison</label>
+            <select class="form-control" ng-model="item.cause">
+                <option value="périmé">Périmé</option>
+                <option value="vente">Vente</option>
+                <option value="autre">Autre</option>
+            </select>
+            <label ng-show="item.cause === 'autre'">Description</label>
+            <input class="form-control" ng-show="item.cause === 'autre' " type="text"  ng-model="item.libelle"  placeholder="entrez la raison"/>
+
+       </div>
+      </div>
+   
+    

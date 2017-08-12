@@ -1,0 +1,57 @@
+
+<div >
+  <a ui-sref="conf">Etape 1 > </a>
+  <a ui-sref="conf.step2">Etape 2</a>
+  
+</div>
+<div ui-view>
+<!--<div ng-hide="User.isAdmin">
+  <p>
+    Endroit réservé à l'Admin
+  </p>
+</div>-->
+<div class="">
+              <h1>
+                <i class="fa fa-th"></i> 
+                Etape 1 : Configuration de base de données 
+              </h1>
+            <div class="tab-content">
+              <div class="tab-pane active" id="tab_1-1">
+                <p>
+                  Indiquez le type de base de données que vous voulez utiliser <select class="form-control" ng-model="config.dbType" ng-disabled="config.expired && !config.activated">
+                    <!--<option>sqlite</option>-->
+                    <option>mysql</option>
+                    <option>postgresql</option>
+                  </select>
+                </p>
+
+                <p>
+               <!--   En cas de SQLITE entrez l'emplacement du fichier de base de données <br/><button class="btn btn-primary" ng-click="conf.readDir()">Emplacement</button>-->
+
+                  <p>Entrez les informations de connexion  à la base de données  .
+                  <form  >
+
+                  <label>Serveur</label><input type="text" class="form-control" ng-model="config.server" ng-disabled="config.expired && !config.activated"></input>
+
+                  <label>Nom d'utilisateur</label><input type="text" class="form-control" ng-model="config.username" ng-disabled="config.expired && !config.activated"></input>
+                  <label>Mot de passe</label><input type="password" class="form-control" ng-model="config.password" ng-disabled="config.expired && !config.activated"></input> 
+                  <label>base de données </label><input type="text" class="form-control" ng-model="config.dbName" ng-disabled="config.expired && !config.activated"></input> 
+                  
+                  </form>
+                </p>
+
+                <button class="btn btn-primary" ng-disabled="config.expired && !config.activated" ng-cng-disabled="config.expired || config.activated" ng-click="conf.testDatabaseConnexion()">Tester la connexion </button>
+
+                <button class="btn btn-primary" ng-disabled="!saveEnabled" ng-click="conf.saveConfiguration()" >Sauvegarder la configuration</button>
+               <button class="btn btn-primary" ng-click="conf.backup()">Backup </button>
+                <button class="btn btn-primary" ng-click="conf.restore()">Restaurer ... </button>
+                <button class="btn btn-primary" ng-click="conf.nextStep('conf.step2')">Etape suivante</button>
+                 
+
+              </div>
+              
+              <!-- /.tab-pane -->
+            </div>
+            <!-- /.tab-content -->
+</div>  
+</div>

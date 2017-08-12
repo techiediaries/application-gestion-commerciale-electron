@@ -1,0 +1,27 @@
+<div class="row">
+    <div class="col-md-12">
+          <h1>Ajouter Utilisateur</h1>
+    </div>
+</div>   
+<div class="row">
+    <div class="col-md-12" style="padding: 20px;">
+         
+          <button class="btn" ng-click="ctrl.clear()"> Effacer </button>
+          <button class="btn" ng-click="ctrl.add()" ng-disabled="item.username === undefined || item.username === ''"> Enregistrer</button>
+    </div>
+
+</div>   
+<div class="row">
+<div class="col-md-12">
+<form>
+                      <label>Nom d'utilisateur</label><input type="text" class="form-control" ng-model="item.username"></input>
+                      <label>Mot de passe</label><input type="password" class="form-control" ng-model="item.password"></input>
+                      <label>Admin?</label>
+                      <select ng-model="item.isAdmin">
+                        <option value="true">Oui</option>
+                        <option value="false">Non</option>
+                      </select>
+                       
+</form>              
+</div>
+</div> 

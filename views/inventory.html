@@ -1,0 +1,50 @@
+<div class="row no-print" style="background: green;">
+    <div class="col-md-12" style="text-transform: uppercase;margin-left:auto;text-align: center;margin-top:auto;">
+        <h1 class="box-title" style="text-transform: uppercase;">Gestion de stock </h1>
+        <div class="row">
+        <div class="col-xs-12">
+        <a class="btn btn-app" ui-sref="inventory.articles">
+                    <span class="badge bg-green">{{countOfArticles}}</span>
+                    <i class="fa fa-list"></i>Articles
+        </a>
+        <a class="btn btn-app" ui-sref="inventory.alertarticles">
+                    <span class="badge bg-red">{{countOfArticlesEnAlerte}}</span>
+                    <i class="fa fa-list"></i>Articles en alerte
+        </a>
+
+        <a class="btn btn-app" ui-sref="inventory.famillies">
+                    <span class="badge bg-green">{{countOfFamilies}}</span>
+                    <i class="fa fa-list"></i>Familles
+        </a>
+        <a class="btn btn-app" ui-sref="inventory.article">
+                <i class="fa fa-plus"></i> Créer Article
+        </a>
+        <a class="btn btn-app" ui-sref="inventory.familly">
+                <i class="fa fa-plus"></i> Créer Famille
+        </a>
+        <a class="btn btn-app" ui-sref="inventory.movements" ng-show="User.isAdmin">
+                <span class="badge bg-green">{{countOfMovements}}</span>
+                <i class="fa fa-list"></i> Mouvements du stock 
+        </a>
+        <a class="btn btn-app" ui-sref="inventory.inmove" ng-show="User.isAdmin">
+                <i class="fa fa-plus"></i> Ajouter en stock
+        </a>
+        <a class="btn btn-app" ui-sref="inventory.outmove" ng-show="User.isAdmin">
+                <i class="fa fa-minus"></i> Retirer du stock
+        </a>
+        </div>
+        </div>
+        </div>
+      
+</div>
+
+<div class="row">
+    <route-loading/>
+    <div ng-if='!isRouteLoading' class="col-xs-12" ui-view>
+    
+    </div>
+</div>
+      
+
+                  
+      

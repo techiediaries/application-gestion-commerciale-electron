@@ -1,0 +1,58 @@
+ <div class="row">
+        <div class="col-md-12">
+        	<h1>Fournisseurs</h1>
+        </div>
+ </div>
+  <div class="row">
+    <div ng-include="'views/list-header-actions.html'" class="col-md-12">
+         
+    </div>
+    <div class="col-md-6">
+      <select class="form-control" ng-model="pageSize">
+          <option value="10">10</option>
+          <option value="20">20</option>
+          <option value="100">100</option>
+          <option value="1000">1000</option>
+          <option value="1000000">Tous</option>          
+       </select>       
+    </div>
+    <div class="col-md-3">
+      <input style="width: 100%"  placeholder="Réference " ng-model="state.reference" class="form-control" /> 
+    </div>    
+    <div class="col-md-3">
+      <input style="width: 100%"  placeholder="Nom " ng-model="state.nom" class="form-control" /> 
+    </div>    
+            
+</div>  
+      <div class="row">
+         <div class="col-xs-12">
+            
+              <div class="box-body table-responsive ">
+                <table class="table table-hover">
+                  <tbody>
+                  <tr>
+                    <th>ID</th>
+                    <th>Réference</th>
+                    <th>Nom</th>
+                    <th>Rprésentant</th>
+                    <th>Tél</th>
+                    <th>Email</th>
+                    <th>Fax</th>
+                    
+                  </tr>
+
+                  <tr ng-repeat="e in items" style="cursor: pointer;"  ng-dblclick="ctrl.editSelected()" ng-click="ctrl.setSelected(e.id)" ng-class="{'row-selected':selections.indexOf(e) !== -1}">
+                    <td>{{e.id}}</td>
+                    <td><span class="label label-success">{{e.reference}}</span></td>
+                    <td contenteditable="true" ng-model="e.nom" ng-attr-contenteditable="{{ isEditable(e) }}">{{e.nom}}</td>
+                    <td contenteditable="true" ng-model="e.representant" ng-attr-contenteditable="{{ isEditable(e) }}">{{e.representant}}</td>
+                    <td contenteditable="true" ng-model="e.tel" ng-attr-contenteditable="{{ isEditable(e) }}">{{e.tel}}</td>
+                    <td contenteditable="true" ng-model="e.email" ng-attr-contenteditable="{{ isEditable(e) }}">{{e.email}}</td>
+                    <td contenteditable="true" ng-model="e.fax" ng-attr-contenteditable="{{ isEditable(e) }}">{{e.fax}}</td>
+                  
+                  </tr>
+                </tbody></table>
+              </div>
+              
+         </div>            
+      </div>

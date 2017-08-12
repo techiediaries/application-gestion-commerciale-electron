@@ -1,0 +1,50 @@
+ <div class="row">
+        <div class="col-md-12">
+        	<h1>Comptes bancaires</h1>
+        </div>
+ </div>
+  <div class="row">
+    <div ng-include="'views/list-header-actions.html'" class="col-md-12">
+         
+    </div>
+    <div class="col-md-12">
+      <select class="form-control" ng-model="pageSize">
+          <option value="10">10</option>
+          <option value="20">20</option>
+          <option value="100">100</option>
+          <option value="1000">1000</option>
+          <option value="1000000">Tous</option>          
+       </select>       
+    </div>
+</div>  
+      <div class="row">
+         <div class="col-xs-12">
+             
+                <table class="table table-hover">
+                  <tbody>
+                  <tr>
+                    
+                    <th>Nom</th>
+                    <th>SWIFT</th>
+                    <th>Téléphone</th>
+                    <th>Addresse</th>
+                    <th>Fax</th>
+                    <th>Représentant</th>
+                    
+                    
+                  </tr>
+                  <tr ng-repeat="e in items" style="cursor: pointer;" ng-click="ctrl.handleClick(e)" ng-dblclick="ctrl.handleDoubleClick(e)" ng-class="{'row-selected':selections.indexOf(e) !== -1}">
+                    
+                    <td>{{e.nom}}</td>
+                    <td>{{e.swift}}</td>
+                    <td>{{e.telephone}}</td>
+                    <td>{{e.addresse}}</td>
+                    <td>{{e.fax}}</td>
+                    <td>{{e.representant}}</td>
+                    
+                    
+                    
+                  </tr>
+                </tbody></table>
+         </div>            
+      </div>

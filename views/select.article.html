@@ -1,0 +1,70 @@
+
+ <div class="row" style="background: gray;">
+    <div class="col-md-12">
+          <a class="btn" ng-click="ctrl.close()" > Fermer </a>
+
+       
+       <a class="btn" ng-click="ctrl.nextPage()" style="float: right;"> Suivant </a>
+          <a class="btn" ng-click="ctrl.prevPage()" style="float: right;"> Précedent </a>
+      <select class="form-control" ng-model="pageSize">
+          <option value="10">10</option>
+          <option value="20">20</option>
+          <option value="100">100</option>
+          <option value="1000">1000</option>
+          <option value="1000000">Tous</option>   
+       </select> 
+       
+      <select class="form-control" ng-model="selectedFamille">
+          <option value="">Choisir famille</option>
+          <option ng-repeat="f in familles" value="{{f.id}}">{{f.libelle}}</option>
+       </select> 
+
+      
+    </div>
+</div>  
+      <div class="row" style="background: gray;">
+         <div class="col-xs-12" style="background: gray;">
+            
+                <table class="table table-hover" style="background: gray;">
+                  <tbody>
+                  <tr>
+                    <th>Réference</th>
+                    <th>Désignation</th>
+                    <th>Prix Achat</th>
+                    <th>Prix unitaire</th>
+                    <th>Taxe</th>
+                    <th>Unité</th>
+                    <th>Quantité</th>
+                    <th>Quantité périmée</th>
+                    <th>Famille</th>
+                    
+                  </tr>
+                  <tr ng-repeat="e in items" style="cursor: pointer;"  
+                      ng-dblclick="ctrl.handleDoubleClick(e)" 
+                      ng-click="ctrl.handleClick(e)" 
+                      ng-class="{'row-selected':e.id === selected.id}">
+
+                    <td>{{e.reference}}</td>
+
+                    <td contenteditable="true" ng-model="e.reference" ng-attr-contenteditable="{{ editMode }}">{{e.designation}}</td>
+                    
+                    <td contenteditable="true" ng-model="e.prixAchat" ng-attr-contenteditable="{{ editMode }}">{{e.prixAchat}}</td>  
+
+                    <td contenteditable="true" ng-model="e.prixUnitaire" ng-attr-contenteditable="{{ editMode }}">{{e.prixUnitaire}}</td>
+
+                    <td contenteditable="true" ng-model="e.taxe" ng-attr-contenteditable="{{ editMode }}">{{e.taxe}}</td>
+
+                    <td contenteditable="true" ng-model="e.unite" ng-attr-contenteditable="{{ editMode }}">{{e.unite}}</td>
+
+                    <td><span class="label label-success" contenteditable="true" ng-model="e.qReel" ng-attr-contenteditable="{{ editMode }}">{{e.qReel}}</span></td>
+
+                    <td contenteditable="true" ng-model="e.qPerime" ng-attr-contenteditable="{{ editMode }}">{{e.qPerime}}</td>
+                    
+                    <td>{{e.Famille.designation}}</td>
+                  </tr>
+                </tbody></table>
+              
+              
+            <!-- /.box -->
+         </div>            
+      </div>

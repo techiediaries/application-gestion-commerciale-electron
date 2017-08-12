@@ -1,0 +1,89 @@
+<div class="">
+            
+              <h1><i class="fa fa-th"></i> Etape 2 : Paramétres de société 
+            </h1>
+
+   <tabs title="Créer nouvel article">
+
+
+    <pane title="Informations genérales">
+      <div class="row">
+        <div class="col-md-8">
+          <label>Raison sociale</label>
+          <input type="text" class="form-control" ng-model="company.raisonSociale" />
+          <label>Addresse</label>
+          <textarea ng-model="company.addresse" class="form-control"></textarea> 
+          <label>Code Postal</label>
+          <input type="text" class="form-control" ng-model="company.codePostal"></input>
+          <label>Ville</label>
+          <input type="text" class="form-control" ng-model="company.ville"></input>
+          <label>Pays</label>
+          <input type="text" class="form-control" ng-model="company.pays"></input>
+
+          <br>
+          <button class="btn btn-primary" ng-click="conf.saveCompany()">Enregistrer </button>
+           <button class="btn btn-primary" ng-click="conf.quit()">Quitter</button>   
+          <!--<button class="btn btn-primary" ng-click="conf.nextStep('conf.step3')">Etape suivante</button>-->
+                      
+        </div>
+        <div class="col-md-4">
+            <label>Logo</label><input id="logoInput" type="file" class="form-control" fileread="company.logo"></input>
+            <img style="width: 100px;height: 100px;" src="{{company.logo}}" id="logo" />
+        </div>
+      </div>
+    </pane>
+    <pane title="Informations société">
+      <div class="row">
+        <div class="col-md-8">
+
+                      
+                      <label>Taxe</label><input type="text" class="form-control" ng-model="company.taxe"></input>
+                      <label>Monnaie</label><input type="text" class="form-control" ng-model="company.monnaie"></input>
+                      <label>Capital</label><input type="text" class="form-control" ng-model="company.capital"></input>
+                      <label>SIRET</label><input type="text" class="form-control" ng-model="company.siret"></input>
+                      <label>ICE</label><input type="text" class="form-control" ng-model="company.ice"></input>
+                      <br>
+                      <button class="btn btn-primary" ng-click="conf.saveCompany()">Enregistrer </button>
+                       <button class="btn btn-primary" ng-click="conf.quit()">Quitter</button>   
+       </div>
+        <div class="col-md-4">
+                      <label>R.C</label><input type="text" class="form-control" ng-model="company.rc"></input>
+                      <label>Patente</label><input type="text" class="form-control" ng-model="company.patente"></input>
+                      <label>CNSS</label><input type="text" class="form-control" ng-model="company.cnss"></input>
+                      <label>I.F</label><input type="text" class="form-control" ng-model="company.identiteFiscale"></input>
+                      <label>C.B</label><input type="text" class="form-control" ng-model="company.codeBanque"></input>
+                      <label>Footer</label>
+                      <!--<textarea class="form-control" 
+                      ng-model="company.footer  "></textarea>-->
+                      <span contenteditable="true" ng-model="company.footer" ng-attr-contenteditable="true">
+                        {{company.footer}}
+                      </span>
+                      <a class="btn" ng-click="formatFooter()" >Initialiser</a>
+          
+
+                      
+           
+        </div>
+      </div>
+    </pane>
+    <pane title="Contacte">
+      <div class="row">
+        <div class="col-md-8">
+          <label>Tél</label><input type="text" class="form-control" ng-model="company.tel1"></input>
+          <label>GSM 1</label><input type="text" class="form-control" ng-model="company.tel2"></input>
+          <label>GSM 2</label><input type="text" class="form-control" ng-model="company.tel3"></input>
+          <label>Email 1</label><input type="text" class="form-control" ng-model="company.email1"></input>
+          <label>Email 2</label><input type="text" class="form-control" ng-model="company.email2"></input>
+
+          <br>
+          <button class="btn btn-primary" ng-click="conf.saveCompany()">Enregistrer </button>
+          <button class="btn btn-primary" ng-click="conf.quit()">Quitter</button>  
+          
+          
+        </div>
+      </div>
+    </pane>    
+</tabs>    
+
+
+</div>

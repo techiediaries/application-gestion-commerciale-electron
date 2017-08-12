@@ -1,0 +1,84 @@
+
+ <div class="row">
+        <div class="col-md-12">
+          <h1>Entrée/Sortie en Stock</h1>
+        </div>
+ </div>
+
+ <tabs title="Movements de stock">
+    <pane title="Alimenter le stock">
+      <div class="row">
+      <div class="col-md-12" style="padding: 20px;">
+      
+        <button class="btn" ng-click="mctrl.clearMovement()"> Effacer </button>
+        <button class="btn" ng-click="mctrl.addMovement()" ng-disabled="movement.coefficient < 1 || movement.ArticleId === undefined || movement.ArticleId === '' || movement.prixAchat === undefined || movement.prixAchat === ''|| movement.quantite === undefined || movement.quantite === '' "> Enregistrer</button>
+
+      </div>
+        <div class="col-md-12"> 
+
+            <label> Article</label>
+            <select class="form-control" ng-model="movement.ArticleId"> 
+                <option value=""> Choisir l'article </option>
+                <option ng-repeat="a in articles" value="{{a.id}}"> {{a.reference}} </option>
+            </select>
+            <label>Quantité </label>
+            <input class="form-control" type="text"  ng-model="movement.quantite"  placeholder="entrez la quantité"/>
+
+            <label>Prix d'achat </label>
+            <input class="form-control" type="text"  ng-model="movement.prixAchat"  placeholder="entrez le prix d'achat "/>
+            
+            <label>Taxe</label>
+            <input class="form-control" type="text"  ng-disabled="true" ng-model="movement.taxe = 0.2"  placeholder="Taxe"/>
+            
+            <label>TVA </label>
+            <input class="form-control" type="text"  ng-model="movement.tva=movement.prixAchat * movement.taxe"  placeholder="le tva"/>
+            
+            <label>Prix d'achat(Hors taxe) </label>
+            <input class="form-control" type="text"  ng-model="movement.prixAchatHT=movement.prixAchat - movement.tva"  placeholder="le prix d'achat(hors taxe) "/>
+ 
+            <!--<label>Coéfficient </label>
+            <input class="form-control" type="text"  ng-model="movement.coefficient"  placeholder="entrez le coéfficient"/>-->
+            <label>Prix unitaire(Vente) </label>
+            <input class="form-control" type="text"  ng-model="movement.prixUnitaire"  placeholder="Entrez le prix unitaire de vente"/> 
+        </div>
+      </div>
+    </pane>
+    <pane title="Movements">
+      <div class="row">
+         <div class="col-xs-12">
+            
+                  <a class="btn" ng-click="mctrl.deleteSelected()" ng-disabled="selected.reference === undefined"> Supprimer </a>
+                  <a class="btn" ng-click="mctrl.editSelected()" ng-disabled="selected.reference === undefined"> Modifier </a>
+                  <a class="btn" ng-click="mctrl.saveSelected()" ng-disabled="selected.reference === undefined"> Sauvegarder </a>
+                  
+                  <a class="btn" ng-click="mctrl.nextPage()" style="float: right;"> Suivant </a>
+                  <a class="btn" ng-click="mctrl.prevPage()" style="float: right;"> Précedent </a>
+                        <select class="form-control" ng-model="pageSize">
+                          <option value="10">10</option>
+                          <option value="20">20</option>
+                          <option value="100">100</option>
+                          <option value="1000">1000</option>
+                       </select> 
+              
+              <div class=" table-responsive ">
+                <table class="table table-hover">
+                  <tbody>
+                  <tr>
+                    <th>ID</th>
+                    <th>Article</th>
+                    <th>Type</th>
+                    <th>Quantité</th>
+                  </tr>
+                  <tr ng-repeat="e in items" style="cursor: pointer;" ng-click="mctrl.setSelected(e.id)" ng-class="{'row-selected':e.id === selected.id}">
+                    <td>{{e.id}}</td>
+                    <td>{{e.Article.reference}}</td>
+                    <td>{{e.type}}</td>
+                    <td><span class="label label-success">{{e.quantite}}</span></td>
+                  </tr>
+                </tbody></table>
+              </div>
+           
+         </div>            
+      </div>
+    </pane>
+</tabs>

@@ -1,0 +1,58 @@
+ <div class="row">
+        <div class="col-md-12">
+        	<h1>Clients</h1>
+        </div>
+ </div>
+  <div class="row">
+    <div ng-include="'views/list-header-actions.html'" class="col-md-12">
+    </div>
+     <div  class="col-md-3">
+  
+      <select class="form-control" ng-model="pageSize">
+          <option value="10">10</option>
+          <option value="20">20</option>
+          <option value="100">100</option>
+          <option value="1000">1000</option>
+          <option value="1000000">Tous</option>          
+       </select> 
+         
+    </div>
+    <div class="col-md-3">
+      <input style="width: 100%"  placeholder="Réference " ng-model="state.reference" class="form-control" /> 
+    </div>    
+    <div class="col-md-3">
+      <input style="width: 100%"  placeholder="Nom " ng-model="state.nom" class="form-control" /> 
+    </div>    
+        
+</div>  
+      <div class="row">
+         <div class="col-xs-12">
+           
+              <div class=" table-responsive ">
+                <table class="table table-hover">
+                  <tbody>
+                  <tr>
+                    <th>Réference</th>
+                    <th>Nom</th>
+                    <th>Rprésentant</th>
+                    <th>Tél</th>
+                    <th>Email</th>
+                    <th>Fax</th>
+                    <th>Solde</th>
+                    
+                  </tr>
+                  <tr ng-repeat="e in items" style="cursor: pointer;"  ng-click="ctrl.handleClick(e)" ng-dblclick="ctrl.handleDoubleClick(e)" ng-class="{'row-selected':selections.indexOf(e) !== -1}">
+                    <td contenteditable="true" ng-model="e.reference" ng-attr-contenteditable="{{ editMode }}">{{e.reference}}</td>
+                    <td contenteditable="true" ng-model="e.nom" ng-attr-contenteditable="{{ editMode }}">{{e.nom}}</td>
+                    <td contenteditable="true" ng-model="e.representant" ng-attr-contenteditable="{{ editMode }}">{{e.representant}}</td>
+                    <td contenteditable="true" ng-model="e.tel" ng-attr-contenteditable="{{ editMode }}">{{e.tel}}</td>
+                    <td contenteditable="true" ng-model="e.email" ng-attr-contenteditable="{{ editMode }}">{{e.email}}</td>
+                    <td contenteditable="true" ng-model="e.fax" ng-attr-contenteditable="{{ editMode }}">{{e.fax}}</td>
+                    <td contenteditable="true" ng-model="e.solde" ng-attr-contenteditable="{{ editMode }}">{{e.solde}}</td>
+                  
+                  </tr>
+                </tbody></table>
+              </div>
+              
+         </div>            
+      </div>

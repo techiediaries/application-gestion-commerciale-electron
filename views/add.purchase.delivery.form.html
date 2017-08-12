@@ -1,0 +1,114 @@
+<div class="row no-print">
+    <div class="col-md-12 no-print" style="padding: 10px;"> 
+      
+          <button class="btn" ng-click="ctrl.clear()"> Nouvelle..</button> 
+          <button class="btn" ng-click="ctrl.add()" ng-disabled="item.id || item.reference === undefined || item.reference === ''"> Enregistrer </button> 
+          <button class="btn" ng-click="ctrl.payIt()" ng-disabled="!item.id || item.payee" >Régler </button>
+          <button class="btn" ng-click="ctrl.print()"> Imprimer</button> 
+ 
+    </div>
+</div>     
+<div class="row">
+    <div class="col-md-12">
+    <div class="box" ui-view>
+    <div class="box-header with-border">
+            <header>
+              <h1 >Bon de livraison</h1>
+              <address>
+                <p contenteditable="true" ng-model="item.nomSociete" ng-attr-contenteditable="true"></p>
+                <p contenteditable="true" ng-model="item.addressSociete" ng-attr-contenteditable="true}"></p>
+                <p contenteditable="true" ng-model="item.telSociete" ng-attr-contenteditable="true"></p>
+                <p contenteditable="true" ng-model="item.tel2Societe" ng-attr-contenteditable="true"></p>
+              </address>
+              <span><img alt=""  id="logo" ng-src="{{ item.logo }}"></span>
+
+            </header>    
+
+    <article>
+      
+      <table class="">
+
+        <tr>
+          <th style="border-width: 0px; width: 20%;"><span>Numéro bon de livraison </span></th>
+          <td><span contenteditable="true" ng-model="item.reference" ng-attr-contenteditable="true"></span></td>
+        </tr>
+
+       <!-- <tr>
+
+          <th style="border-width: 0px; width: 20%;"><span><a ui-sref="pmgmt.delivery.selectorder">Commande</a></span></th>
+          <td><span contenteditable="true" ng-model="item.CommandeAchatId" ng-attr-contenteditable="true">
+            
+          </span></td>
+        </tr>-->
+        <tr>
+          <th  style="border-width: 0px; width: 20%;"><span><a ui-sref="pmgmt.delivery.selectprovider">Fournisseur</a></span></th>
+          <td><!--<span contenteditable="true" ng-model="item.FournisseurId" ng-attr-contenteditable="true"> -->
+            <span>{{item.FournisseurRef}}</span> | <span>{{item.FournisseurNom}}</span>
+            
+          </span></td>
+        </tr>
+
+
+        <tr>
+          <th style="border-width: 0px; width: 20%;"><span >Date</span></th>
+          <td><input type="date" ng-model="item.date"/></span></td>
+        </tr>
+        <tr ng-show="item.id">
+          <th style="border-width: 0px;width: 20%;"><span>Méthode de paiement</span></th>
+          <td>
+            <select ng-model="item.paiement">
+              <option value="espéces">Espéces</option>
+              <option value="chéques">Chéques</option>
+            </select>
+            <span contenteditable="true" ng-show="item.id && (item.paiement === 'chéques') " ng-model="item.chequeno" ng-attr-contenteditable="true"></span>
+          </td>
+        </tr>
+        
+       <!-- <tr>
+          <th><span >A</span></th>
+          <td><span id="prefix" contenteditable="true" ng-attr-contenteditable="true" ng-model="command.villeSociete">
+            {{command.villeSociete}}
+          </span></td>
+        </tr>-->
+      </table>
+      <table class="inventory">
+        <thead>
+          <tr>
+            <th><span >Article</span></th>
+          
+            <th><span >Quantité</span></th>
+            <th><span >Prix Achat </span></th>
+            
+            <th><span >Observation</span></th>
+          </tr>
+        </thead>
+        <tbody>
+          
+          <tr ng-repeat="it in item.items track by $index" ng-dblclick="removeItem(it)">
+
+            <td><span style="text-align: center;cursor:  not-allowed;" contenteditable="false" ng-model="it.reference">{{it.reference}}</span></td>
+            <td><span style="text-align: center;" contenteditable="true" ng-model="it.quantite" ng-attr-contenteditable="true">{{it.quantite}}</span></td>
+            <td><span style="float: left; text-align: left;" contenteditable="true" ng-model="it.prixAchat" ng-attr-contenteditable="true">{{it.prixAchat}}</span></td>
+            
+            <td><span style="float: left; text-align: left;" contenteditable="true" ng-model="it.description" ng-attr-contenteditable="true">{{it.description}}</span></td>
+            
+          </tr>
+        </tbody>
+      </table>
+      <a  class="btn btn-primary no-print" ui-sref="pmgmt.delivery.selectArticle">+</a>
+            <br>
+      <span style="background: green;color: white;text-transform: uppercase;">Somme à payer : {{ calculateSubTotal()}}</span> 
+ 
+    </article>
+    
+    <aside class="addnotes">
+      <h1><span >Notes Additionnelles</span></h1>
+      <div contenteditable="true" ng-model="item.notes" ng-attr-contenteditable="true">
+        <p>......</p>
+      </div>
+    </aside>
+
+</div>
+</div>
+</div>
+</div>    

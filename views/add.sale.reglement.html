@@ -1,0 +1,141 @@
+<div  ui-view>
+<div class="row no-print">
+    <div class="col-md-12 no-print" style="padding: 10px;"> 
+      
+          <button class="btn" ng-click="ctrl.clear()"> Nouvelle..</button> 
+          <button class="btn" ng-click="ctrl.add()" ng-disabled="item.id || item.reference === undefined || item.reference === ''"> Enregistrer </button> 
+          <button class="btn" ng-click="ctrl.print()"> Imprimer</button> 
+ 
+    </div>
+</div>     
+<div class="row" ng-disabled="item.id">
+    <div class="col-md-12">
+    <div class="box">
+    <div class="box-header with-border">
+            <header>
+              <h1 >Réglement</h1>
+              
+            </header>    
+
+    <article>
+      
+      <table class="">
+        <tr>
+          <th style="border-width: 0px;width: 20%;"><span>Numéro </span></th>
+          <td><span contenteditable="true" ng-model="item.reference" ng-attr-contenteditable="true"></span></td>
+        </tr>
+        <tr>
+          <th style="border-width: 0px;width: 20%;"><span >Date</span></th>
+          <td><input type="date" ng-model="item.date"/></span></td>
+        </tr>
+        <tr>
+          <th style="border-width: 0px;width: 20%;"><span><a ui-sref="smgmt.reglement.selectclient">Client </a></span></th>
+          <td><span style="display: none;" contenteditable="true" ng-model="item.ClientId" ng-attr-contenteditable="true">{{item.ClientId}}</span>
+          <span>{{client.reference}} || {{client.nom}}</span>
+          </td>
+        </tr>
+        <tr>
+          <th style="border-width: 0px;width: 20%;"><span>Somme à payer </span></th>
+          <td><span contenteditable="true" ng-model="item.somme" ng-attr-contenteditable="true">
+          {{item.somme}}
+          </span>
+          <span style="margin-left:10px;text-transform: uppercase;"> {{Company.monnaie}}</span>
+          </td>
+        </tr>        
+        <tr>
+          <th style="border-width: 0px;width: 20%;"><span>Paiement</span></th>
+          <td>
+            <select class="form-control" ng-model="item.paiement">
+              <option value="espéces">Espéces</option>
+              <option value="chéques">Chéques</option>
+              
+            </select>
+          </td>
+        </tr>
+        <tr ng-show="item.paiement == 'chéques' ">
+          <th style="border-width: 0px;width: 20%;"><span>Numéro de chéque</span></th>
+          <td>
+            <span contenteditable="true" ng-model="item.chequeno" ng-attr-contenteditable="true">
+              {{ item.chequeno }}
+            </span>
+          </td>
+        </tr>
+          
+      </table>
+      <table class="inventory">
+          <!--<thead>
+          <tr>
+            <th><span >Référence</span></th>
+          
+            <th><span >Date</span></th>
+            
+            <th><span >Somme</span></th>
+          </tr>
+          </thead>-->
+          <tbody ng-repeat="it in item.items track by $index" ng-dblclick="removeItem(it)">
+          <tr>
+            <td colspan="1">{{it.reference }} | {{it.date | date :  "dd/MM/y"  }}</td>
+          </tr>
+          <tr class="collapsed">
+              <td colspan="3">
+
+                  <table class="inventory">
+                      <thead style="background-color: gray;">
+                      <tr style="background-color: gray;">
+                          <th >Désignation</th>
+                          <th >Quantité</th>
+                          <th >Prix unitaire</th>
+                          <th >Total TTC</th>
+                       
+                      </tr>
+                      </thead>
+                      <tbody>
+                      <tr  ng-repeat="itt in it.LigneVentes track by $index" >
+                          <td class="opp-detail">{{itt.Article.designation}}</td>
+                          <td class="opp-detail">{{itt.quantite}}</td>
+                          <td class="opp-detail">{{itt.prixUnitaire | currency : '' }}</td>
+                          <td class="opp-detail">{{ (itt.quantite * itt.prixUnitaire) | currency : '' }}</td>
+                          
+                      </tr>
+                      </tbody>
+          <tfooter>
+          <tr>
+            <th style="border-width:  0px;"></th>
+          
+            <th style="border-width:  0px;"></th>
+            
+            <th style="border-width:  0px;"></th>
+            <th style="background-color: gray;">{{it.somme | currency:''}} DH</th>
+
+          </tr>
+          </tfooter>                      
+                  </table>
+
+              </td>
+          </tr>
+          </tbody>
+      </table>
+      <div class="col-md-9"></div>
+      <div class="col-md-3" style="border: 1px solid black;" ng-show="item.items.length !== 0">
+      Total TTC : {{data.somme | currency : ''}} DH <br>
+      </div>
+      <br/>
+      <a ng-hide="item.CommandeAchatId" class="btn btn-primary no-print" ui-sref="smgmt.reglement.selectso">+</a>
+      <br>
+
+ 
+    </article>
+    
+
+<!--    <aside class="addnotes">
+      <h1><span >Notes Additionnelles</span></h1>
+      <div contenteditable="true" ng-model="item.notes" ng-attr-contenteditable="true">
+        <p>......</p>
+      </div>
+    </aside>-->
+
+</div>
+</div>
+</div>
+</div>    
+</div>

@@ -1,0 +1,31 @@
+
+<div class="" ng-show="User.isAdmin">
+             
+              <h1><i class="fa fa-th"></i> Restauration de la base de données 
+            </h1>
+
+            <div class="tab-content">
+              <div class="tab-pane active" id="tab_1-1">
+              	<p>
+              		Entrez l'emplacement du fichier de base de données <br/>
+									<button class="btn btn-primary" ng-click="conf.readDir()">
+										Emplacement du fichier de sauvegarde
+									</button>
+
+              	</p>
+								<br>
+                <button class="btn btn-primary" ng-click="conf.restore()">Restaurer la base de données</button>
+								<br>
+
+                <button class="btn btn-primary" ng-click="conf.backup()">Sauvegarder la base de données</button>
+								<br>
+
+								<button class="btn btn-primary" ng-click="conf.nextStep('conf.step2')">Etape suivante</button>
+                
+
+              </div>
+              
+              <!-- /.tab-pane -->
+            </div>
+            <!-- /.tab-content -->
+</div>

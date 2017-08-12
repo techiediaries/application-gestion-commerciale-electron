@@ -1,0 +1,59 @@
+ <div class="row">
+        <div class="col-md-12">
+        	<h1>Créer des nomenclatures</h1>
+        </div>
+ </div>
+ 
+ <tabs title="Créer nouvel article">
+    <pane title="Informations genérales">
+      <div class="row">
+        <div class="col-md-12">
+        	<form class="form">
+        		 
+        			<label>Code</label><input type="text" class="form-control" ng-model="famille.code" />
+        			<label>Libellé</label><input type="text" class="form-control" ng-model="famille.libelle" />
+        			<label>Désignation</label><input type="text" class="form-control" ng-model="famille.designation" />
+        			
+
+        		
+        	</form>
+        </div>
+      </div>
+    </pane>
+    <pane title="Stocks">
+      <div class="row">
+        <div class="col-md-12">
+        	<form class="form">    
+    			<input type="checkbox" /><label>Gestion automatique de stock</label><br>
+    			<label>Quantité Réelle </label><input type="text" class="form-control" ng-model="famille.quantiteReel" />
+    			<label>Quantité théorique </label><input type="text" class="form-control" ng-model="famille.quantiteTheorique" />
+    			<label>Quantité minimale </label><input type="text" class="form-control" ng-model="famille.quantiteMin" />
+    			<label>Quantité maximale </label><input type="text" class="form-control" ng-model="famille.quantiteMax" />
+  
+    		</form>
+    	</div>
+      </div>			
+    </pane>
+
+    <pane title="Complément">
+      <div class="row"><div class="col-md-12">
+      		<form> 
+            <label>TVA </label><input type="text" class="form-control" ng-model="famille.tva" />
+            <label>Coéfficient de marge </label><input type="text" class="form-control" ng-model="famille.coefficient" />
+    			  <label>Quarantie en mois </label><input type="text" class="form-control" ng-model="famille.guarantie" />
+            <label>Fournisseur </label> <select ng-model="famille.fournisseur"><option></option></select>
+          </form>
+      </div></div>
+    </pane>
+    <pane title="Tarifs">
+      <div class="row"><div class="col-md-12">This is the content of the second tab.</div></div>
+    </pane>
+    
+    <pane title="Comptabilité">
+      <div class="row"><div class="col-md-12">This is the content of the second tab.</div></div>
+    </pane>
+    
+
+
+
+</tabs>

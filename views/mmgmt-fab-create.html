@@ -1,0 +1,104 @@
+<div class="row">
+    <div class="col-md-12" style="padding: 10px;">
+      
+          <button class="btn" ng-click="pctrl.clearCommand()"> Nouveau</button> 
+          <button class="btn" ng-click="pctrl.saveCommand()"> Lancer la production</button>  
+          <button class="btn" ng-click="pctrl.sendCommand()"> Transférer en stock </button> 
+
+    </div>
+</div>    
+
+<div class="row" ui-view>
+    <div class="col-md-12">
+  
+
+           <header>
+              <h1 >Commande de fabrication</h1>
+              <!--<address>
+                <p contenteditable="true" ng-model="devis.customer.name" ng-attr-contenteditable="{{ dvEditMode }}"></p>
+                <p contenteditable="true" ng-model="devis.customer.address" ng-attr-contenteditable="{{ dvEditMode }}"></p>
+                <p contenteditable="true" ng-model="devis.customer.phone" ng-attr-contenteditable="{{ dvEditMode }}"></p>
+                <p contenteditable="true" ng-model="devis.customer.email" ng-attr-contenteditable="{{ dvEditMode }}"></p>
+              </address>
+              <span><img alt=""  id="logo" ng-src="{{ devis.logo }}"><input style="width:20px;height:10px;" type="file" id="logoInput" accept="image/*" /></span>-->
+
+            </header>
+            <article>
+              <!--<h1>Recipient</h1>
+              <address>
+                <p contenteditable="true" ng-model="devis.company.name" ng-attr-contenteditable="{{ dvEditMode }}"></p>
+                <p contenteditable="true" ng-model="devis.company.address" ng-attr-contenteditable="{{ dvEditMode }}"></p>
+                <p contenteditable="true" ng-model="devis.company.phone" ng-attr-contenteditable="{{ dvEditMode }}"></p>
+                <p contenteditable="true" ng-model="devis.company.email" ng-attr-contenteditable="{{ dvEditMode }}"></p>
+
+              </address>-->
+              <table class="meta" style="float: left;">
+                <tr>
+                  <th><span>Numéro</span></th>
+                  <td><span contenteditable="true" ng-model="command.reference" ng-attr-contenteditable="true"></span></td>
+                </tr>
+                <tr>
+                  <th><span >Date</span></th>
+                  <td><input type="date" ng-model="command.date"/></span></td>
+                </tr>
+                <tr>
+                  <th style="cursor: pointer;" ><span > <a ui-sref="mmgmt.createCF.selectTarget"> A Fabriquer? </a></span></th>
+                  <td>
+                    <span >{{command.target.reference}}</span>
+                  </td>
+                </tr>
+                <tr>
+                  <th><span>Quantité</span></th>
+                  <td><span contenteditable="true" ng-model="command.quantite" ng-attr-contenteditable="true">{{command.quantite}}</span></td>
+                </tr>
+                
+              </table>
+              <table class="inventory">
+                <thead>
+                  <tr>
+                    <th><span >Article</span></th>
+                    <th><span >Désignation</span></th>
+                    <th><span >Quantité</span></th>
+                    
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr ng-repeat="item in command.items">
+                    <td><a class="cut" ng-click="cctrl.removeItem(item)">-</a><span contenteditable="true" ng-model="item.reference">{{item.reference}}</span></td>
+                    <td><span contenteditable="true" ng-model="item.designation" ng-attr-contenteditable="true">{{item.designation}}</span></td>
+                    <td style="text-align: left;"><span contenteditable="true" ng-model="item.quantite" ng-attr-contenteditable="true">{{item.quantite}}</span></td>
+                  </tr>
+                </tbody>
+              </table>
+              <a class="btn btn-primary" ui-sref="mmgmt.createCF.selectArticle">+</a>
+              <!--<table class="balance">
+                <tr>
+                  <th><span >Sous Total</span></th>
+                  <td><span data-prefix>MAD</span><span>{{ calculateSubTotal() }}</span></td>
+                </tr>
+                <tr>
+                  <th><span >TTC</span></th>
+                  <td>
+                    <span contenteditable="true" ng-model="devis.tax" ng-attr-contenteditable="{{ dvEditMode }}">20%</span
+                  </td>
+                </tr>
+                <tr>
+                  <th><span>Somme payée</span></th>
+                  <td><span data-prefix>$</span><span contenteditable="true" ng-model="devis.paid" ng-attr-contenteditable="{{ dvEditMode }}">0.00</span></td>
+                </tr>
+                <tr>
+                  <th><span >Somme Due</span></th>
+                  <td><span data-prefix>{{ devis.currencySymbol }}</span><span>{{ calculateTotal() - devis.paid }}</span></td>
+                </tr>
+              </table>-->
+            </article>
+            <aside>
+              <h1><span >Notes Additionnelles</span></h1>
+              <div contenteditable="true" ng-model="commmand.notes" ng-attr-contenteditable="true">
+                <p>......</p>
+              </div>
+            </aside>
+
+</div>
+</div>
+

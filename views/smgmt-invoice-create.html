@@ -1,0 +1,92 @@
+<div class="row">
+    <div class="col-md-12">
+    <div class="box">
+    <div class="box-header with-border">
+
+    <header>
+      <h1 >Facture</h1>
+      <address>
+        <p contenteditable="true" ng-model="order.customer.name" ng-attr-contenteditable="{{ editMode }}"></p>
+        <p contenteditable="true" ng-model="order.customer.address" ng-attr-contenteditable="{{ editMode }}"></p>
+        <p contenteditable="true" ng-model="order.customer.phone" ng-attr-contenteditable="{{ editMode }}"></p>
+        <p contenteditable="true" ng-model="order.customer.email" ng-attr-contenteditable="{{ editMode }}"></p>
+      </address>
+      <span><img alt=""  id="logo" ng-src="{{ invoice.logo }}"><input style="width:20px;height:10px;" type="file" id="logoInput" accept="image/*" /></span>
+
+    </header>
+    <article>
+      <h1>Recipient</h1>
+      <address>
+        <p contenteditable="true" ng-model="invoice.company.name" ng-attr-contenteditable="{{ editMode }}"></p>
+        <p contenteditable="true" ng-model="invoice.company.address" ng-attr-contenteditable="{{ editMode }}"></p>
+        <p contenteditable="true" ng-model="invoice.company.phone" ng-attr-contenteditable="{{ editMode }}"></p>
+        <p contenteditable="true" ng-model="invoice.company.email" ng-attr-contenteditable="{{ editMode }}"></p>
+
+      </address>
+      <table class="meta">
+        <tr>
+          <th><span>NO #</span></th>
+          <td><span contenteditable="true" ng-model="invoice.no" ng-attr-contenteditable="{{ editMode }}"></span></td>
+        </tr>
+        <tr>
+          <th><span >Date</span></th>
+          <td><input type="date" ng-model="invoice.date"/></span></td>
+        </tr>
+        <tr>
+          <th><span >Montant</span></th>
+          <td><span id="prefix" contenteditable="true" ng-model="invoice.currencySymbol" ng-attr-contenteditable="{{ editMode }}">MAD </span><span>{{ calculateTotal() - invoice.paid }}</span></td>
+        </tr>
+      </table>
+      <table class="inventory">
+        <thead>
+          <tr>
+            <th><span >Article</span></th>
+            <th><span >Description</span></th>
+            <th><span >Coéfficient</span></th>
+            <th><span >Quantité</span></th>
+            <th><span >Prix</span></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="item in invoice.items">
+            <td><a class="cut" ng-click="removeItem(item)">-</a><span contenteditable="true" ng-model="item.name">{{item.name}}</span></td>
+            <td><span contenteditable="true" ng-model="item.description" ng-attr-contenteditable="{{ editMode }}">{{item.description}}</span></td>
+            <td><span data-prefix>$</span><span contenteditable="true" ng-model="item.rate" ng-attr-contenteditable="{{ editMode }}">{{item.rate}}</span></td>
+            <td><span contenteditable="true" ng-model="item.quantity" ng-attr-contenteditable="{{ editMode }}">{{item.quantity}}</span></td>
+            <td><span data-prefix>$</span><span>{{ item.rate * item.quantity }}</span></td>
+          </tr>
+        </tbody>
+      </table>
+      <a class="btn btn-primary" ng-click="addItem()">+</a>
+      <table class="balance">
+        <tr>
+          <th><span >Sous Total</span></th>
+          <td><span data-prefix>MAD</span><span>{{ calculateSubTotal() }}</span></td>
+        </tr>
+        <tr>
+          <th><span >TTC</span></th>
+          <td>
+            <span contenteditable="true" ng-model="invoice.tax" ng-attr-contenteditable="{{ editMode }}">20%</span
+          </td>
+        </tr>
+        <tr>
+          <th><span>Somme payée</span></th>
+          <td><span data-prefix>$</span><span contenteditable="true" ng-model="invoice.paid" ng-attr-contenteditable="{{ editMode }}">0.00</span></td>
+        </tr>
+        <tr>
+          <th><span >Somme Due</span></th>
+          <td><span data-prefix>{{ invoice.currencySymbol }}</span><span>{{ calculateTotal() - invoice.paid }}</span></td>
+        </tr>
+      </table>
+    </article>
+    <aside>
+      <h1><span >Notes Additionnelles</span></h1>
+      <div contenteditable="true" ng-model="invoice.notes" ng-attr-contenteditable="{{ editMode }}">
+        <p>......</p>
+      </div>
+    </aside>
+
+</div>
+</div>
+</div>
+</div>

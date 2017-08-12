@@ -1,0 +1,40 @@
+ <div class="row">
+        <div class="col-md-12">
+        	 <h1>Créer des fournisseurs </h1>
+        </div>
+ </div>
+ <div class="row">
+    <div class="col-md-12">
+          <button class="btn" ng-click="ctrl.clear()"> Nouveau..</button> 
+          <button class="btn" ng-click="ctrl.add()" ng-disabled="item.reference === undefined || item.reference === ''"> Enregistrer </button> 
+      
+    </div>
+</div>     
+ <tabs title="Créer nouvel fournisseur"> 
+    <pane title="Informations genérales">
+      <div class="row">
+        <div class="col-md-12">
+        	<form class="form">
+        		 
+        			<label>Réference</label><input type="text" class="form-control" ng-model="item.reference" placeholder="entrez le code de  fournisseur" />
+        			<label>Nom</label><input type="text" class="form-control" ng-model="item.nom" placeholder="entrez le nom de  fournisseur"/>
+        	</form>
+        </div>
+      </div>
+    </pane>
+
+
+    <pane title="Complément">
+      <div class="row">
+          <div class="col-md-12">
+      		    <label>Nom de représentant </label><input type="text" class="form-control" ng-model="item.representant" placeholder="entrez le nom de personne à contacter" />
+              <label>Tél</label><input type="text" class="form-control" ng-model="item.tel" placeholder="entrez le télephone de  fournisseur" />
+              <label>Email</label><input type="text" class="form-control" ng-model="item.email" placeholder="entrez l'email de  fournisseur" />
+              <label>Fax</label><input type="text" class="form-control" ng-model="item.fax" placeholder="entrez le fax de fournisseur" />
+          </div>
+      </div>
+    </pane>
+
+
+
+</tabs>

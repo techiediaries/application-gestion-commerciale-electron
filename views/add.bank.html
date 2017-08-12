@@ -1,0 +1,26 @@
+<div class="row">
+    <div class="col-md-12">
+          <h1>Ajouter banques</h1>
+    </div>
+</div>   
+<div class="row">
+    <div class="col-md-12" style="padding: 20px;">
+         
+          <button class="btn" ng-click="ctrl.clear()"> Effacer </button>
+          <button class="btn" ng-click="ctrl.add()" ng-disabled="item.nom === undefined || item.nom === ''"> Enregistrer</button>
+    </div>
+
+</div>   
+<div class="row">
+<div class="col-md-12">
+<form>
+                      <label>Nom</label><input type="text" class="form-control" ng-model="item.nom"></input>
+                      <label>Code SWIFT</label><input type="text" class="form-control" ng-model="item.swift"></input>
+                      <label>Téléphone</label><input type="text" class="form-control" ng-model="item.telephone"></input>
+                      <label>Addresse</label>
+                      <textarea ng-model="item.addresse" class="form-control"></textarea> 
+                      <label>Fax</label><input type="text" class="form-control" ng-model="item.fax"></input>
+                      <label>Représentant</label><input type="text" class="form-control" ng-model="item.representant"></input>
+</form>              
+</div>
+</div> 

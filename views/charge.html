@@ -1,0 +1,36 @@
+      <div class="row no-print">
+        <div class="col-md-12" style="text-transform: uppercase;margin-left:auto;text-align: center;margin-top:auto;">
+          
+              <h1 class="box-title">Gestion de charges </h1>
+
+              
+              <div class="row">
+                <div class="col-xs-12">
+                  <a class="btn btn-app" ui-sref="charge.list">
+                    <span class="badge bg-green">{{chargeTotal |currency:'د.م':0 }}</span>
+                    <i class="fa fa-list"></i>Afficher charges
+                  </a>
+                  <a class="btn btn-app" ui-sref="charge.add">
+                    <i class="fa fa-plus"></i> Ajouter charge
+                  </a>
+                  <a class="btn btn-app" ui-sref="charge.category">
+                    <i class="fa fa-plus"></i> Créer catégorie
+                  </a>
+
+
+                </div>
+
+              </div>
+              
+        </div>
+        <!-- /.col -->
+      </div>
+</div>
+<div class="row">
+        <route-loading/>
+        <div ng-if='!isRouteLoading' class="col-md-12" ui-view>
+          
+          <!-- /.box -->
+        </div>
+        <!-- /.col -->
+      </div>

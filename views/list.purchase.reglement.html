@@ -1,0 +1,80 @@
+ <div class="row">
+        <div class="col-md-12">
+          <h1>Réglements </h1>
+        </div>
+ </div>
+ <div class="row" class="no-print">
+    <div ng-include="'views/list-header-actions.html'" class="col-md-12">
+         
+    </div>
+    <div class="col-md-3">
+      <select class="form-control" ng-model="pageSize">
+          <option value="10">10</option>
+          <option value="20">20</option>
+          <option value="100">100</option>
+          <option value="1000">1000</option>
+          <option value="1000000">Tous</option>          
+       </select>       
+    </div>
+    <div class="col-md-3"></div>
+    <div class="col-md-3">
+      <a class="btn btn-primary" ui-sref="pmgmt.reglements.selectprovider" style="padding-left:1px;margin-left:2px;text-transform: uppercase;width: 100%;"> Sélectionner le fournisseur</a>
+    </div>
+    <div class="col-md-3">
+      <input style="width: 100%"  ng-model="fournisseur.reference" class="form-control" /> 
+    </div>    
+    <div class="col-md-12"><hr></div>
+    <div class="col-md-3">
+      <input style="width: 100%"  placeholder="Réference" ng-model="state.reference" class="form-control" /> 
+    </div>    
+    <div class="col-md-3">
+    </div>    
+    
+    <div class="col-md-3">
+      <input placeholder="Début de période" class="form-control" type="text" onfocus="(this.type='date')" 
+       ng-model="state.startPeriod" value="{{ startPeriod | date: 'yyyy-MM-dd' }}"> 
+    </div>    
+    <div class="col-md-3">
+      <input placeholder="Fin de période" class="form-control" type="text" onfocus="(this.type='date')" 
+       ng-model="state.endPeriod" value="{{ endPeriod | date: 'yyyy-MM-dd' }}">       
+    </div>       
+</div>  
+
+      <div class="row" ui-view>
+         <div class="col-xs-12">
+            
+              <div class="box-body table-responsive ">
+                <table class="table table-hover">
+                  <tbody>
+                  <tr>
+                    
+                    <th>Réference</th>
+                    
+                    <th>Date</th>
+                    <th>Somme</th>
+                    <th>Mode paiement </th>
+                    <th>Fournisseur</th>
+                    <th>Notes</th>
+                    
+                    
+                  </tr>
+                  <tr ng-repeat="e in items" ng-click="ctrl.setSelected(e.id)" style="cursor: pointer;" ng-class="{'row-selected':selections.indexOf(e) !== -1 }">
+                    
+                    <td>{{e.reference}}</td>
+                    
+                    <td>{{e.date | date}}</td>
+                    <td>{{e.somme}}</td>
+                    <td>{{e.paiement}}
+                      <span ng-show="e.paiement === 'chéques' ">  
+                        ({{e.chequeno}})
+                      </span>  
+                    </td>
+                    <td>{{e.Fournisseur.reference}}</td>
+                    <td>{{e.notes }}</td>
+                  </tr>
+                </tbody></table>
+              </div>
+              
+            <!-- /.box -->
+         </div>            
+      </div>

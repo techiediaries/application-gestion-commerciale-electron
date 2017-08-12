@@ -1,0 +1,52 @@
+ <div class="row">
+        <div class="col-md-12">
+          <h1>Commandes de ventes</h1>
+        </div>
+ </div>
+ <div class="row">
+    <div ng-include="'views/list-header-actions-details.html'" class="col-md-12">
+         
+    </div>
+    <div class="col-md-12">
+      <select class="form-control" ng-model="pageSize">
+          <option value="10">10</option>
+          <option value="20">20</option>
+          <option value="100">100</option>
+          <option value="1000">1000</option>
+          <option value="1000000">Tous</option>   
+       </select>       
+    </div>
+    
+</div>  
+<div class="row">
+         <div class="col-xs-12">
+            <div class="box-body table-responsive ">
+                <table class="table table-hover">
+                  <tbody>
+                  <tr>
+                    <th>Réference</th>
+                    <th>Client</th>
+                    <th>Date</th>
+                    <th>Taxe</th>
+                    <th>Livrée</th>
+                    <th>Facturée</th>
+                    <th>Facture</th>
+                    <th>Bon</th>
+                    
+                    <th>Somme</th>
+                  </tr>
+                  <tr ng-repeat="e in items track by $index" ng-dblclick="ctrl.handleDoubleClick(e)" style="cursor: pointer;" ng-class="{'row-selected':selections.indexOf(e) !== -1 }">
+                    <td>{{e.reference}}</td>
+                    <td>{{e.Client.reference}}|{{e.Client.nom}}</td>
+                    <td>{{e.date | date}}</td>
+                    <td>{{e.taxe}}</td>
+                    <td><span ng-show="e.livree">Oui</span> <span ng-show="!e.livree">Non</span></td>
+                    <td><span ng-show="e.facturee">Oui</span> <span ng-show="!e.facturee">Non</span></td>
+                    <td>{{e.Facture.reference}}</td>
+                    <td>{{e.LivraisonVente.reference}}</td>
+                    <td>{{e.somme}}</td>
+                  </tr>
+                </tbody></table>
+              </div>
+          </div>            
+</div>

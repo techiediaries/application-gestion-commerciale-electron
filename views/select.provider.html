@@ -1,0 +1,61 @@
+ <div class="row">
+        <div class="col-md-12">
+        	<h1>FOURNISSEURS</h1>
+        </div>
+ </div>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="box" style="padding: 10px;">
+          <a class="btn" ng-click="ctrl.close()" > Fermer </a>
+          <a class="btn" ng-click="ctrl.nextPage()" style="float: right;"> Suivant </a>
+          <a class="btn" ng-click="ctrl.prevPage()" style="float: right;"> Précedent </a>          
+
+      </div>
+    </div>
+</div>  
+
+  <div class="row">
+     <div class="col-md-12" style="padding-bottom: 10px;">
+          <select style="width: 47%;float: left;" class="form-control" ng-model="pageSize">
+              <option value="10">10</option>
+              <option value="20">20</option>
+              <option value="100">100</option>
+              <option value="1000">1000</option>
+              <option value="1000000">Tous</option>   
+          </select>
+          <input type="text" style="width: 50%;float: right;" ng-model="search" placeholder="Rechercher"  class="form-control" />
+    
+    </div>
+</div>  
+      <div class="row">
+         <div class="col-xs-12" >
+            
+              <div class="box-body table-responsive " style="background: gray;">
+                <table class="table table-hover" style="background: gray;">
+                  <tbody>
+                  <tr>
+                    <th>ID</th>
+                    <th>Réference</th>
+                    <th>Nom</th>
+                    <th>Rprésentant</th>
+                    <th>Tél</th>
+                    <th>Email</th>
+                    <th>Fax</th>
+                    
+                  </tr>
+
+                  <tr ng-repeat="e in items" style="cursor: pointer;"  ng-dblclick="ctrl.editSelected()" ng-click="ctrl.setSelected(e.id)" ng-class="{'row-selected':selections.indexOf(e) !== -1}">
+                    <td>{{e.id}}</td>
+                    <td><span class="label label-success">{{e.reference}}</span></td>
+                    <td contenteditable="true" ng-model="e.nom" ng-attr-contenteditable="{{ isEditable(e) }}">{{e.nom}}</td>
+                    <td contenteditable="true" ng-model="e.representant" ng-attr-contenteditable="{{ isEditable() }}">{{e.representant}}</td>
+                    <td contenteditable="true" ng-model="e.tel" ng-attr-contenteditable="{{ isEditable(e) }}">{{e.tel}}</td>
+                    <td contenteditable="true" ng-model="e.email" ng-attr-contenteditable="{{ isEditable(e) }}">{{e.email}}</td>
+                    <td contenteditable="true" ng-model="e.fax" ng-attr-contenteditable="{{ isEditable(e) }}">{{e.fax}}</td>
+                  
+                  </tr>
+                </tbody></table>
+              </div>
+              
+         </div>            
+      </div>

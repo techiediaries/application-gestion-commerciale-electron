@@ -1,0 +1,31 @@
+<div class="row">
+    <div class="col-md-12">
+          <h1>Création des comptes </h1>
+    </div>
+</div>   
+<div class="row">
+    <div class="col-md-12" style="padding: 20px;">
+         
+          <button class="btn" ng-click="ctrl.clear()"> Effacer </button>
+          <button class="btn" ng-click="ctrl.add()" ng-disabled="item.code === undefined || item.code === ''"> Enregistrer</button>
+    </div>
+
+</div>   
+      <div class="row">
+        <div class="col-md-12">
+                <p>
+                  <form>
+
+                      <label>Code</label><input type="text" class="form-control" ng-model="item.code"></input>
+                      <label>Libellé</label><input type="text" class="form-control" ng-model="item.libelle"></input>
+                      <label>Début de période </label><input type="date" class="form-control" ng-model="item.debutPeriod"></input>
+                      <label>Fin de période </label><input type="date" class="form-control" ng-model="item.finPeriod"></input>
+                      
+                      <label>Description</label>
+                      <textarea ng-model="item.description" class="form-control"></textarea> 
+                  
+                  </form>
+                </p>
+          
+        </div>
+      </div>

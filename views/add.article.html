@@ -1,0 +1,96 @@
+<div class="row">
+    <div class="col-md-12">
+          <h1>Création des articles</h1>
+    </div>
+</div>  
+<div ui-view>
+<div class="row">
+    <div class="col-md-12" style="padding: 20px;">
+         
+          <button class="btn" ng-click="ctrl.clear()"> Effacer </button>
+          <button class="btn" ng-click="ctrl.add()" ng-disabled="item.reference === undefined || item.reference === ''"> Enregistrer</button>
+    </div>
+
+</div>   
+   <tabs title="Créer nouvel article">
+
+
+    <pane title="Informations genérales">
+      <div class="row">
+        <div class="col-md-12">
+          <form class="form">
+             
+              <label>Réference</label><input type="text" class="form-control" ng-model="item.reference" placeholder="entrez le code de votre article" />
+              <label>Désignation</label><input type="text" class="form-control" ng-model="item.designation" placeholder="entrez la désignation de votre article"/>
+              
+              <label>Famille</label>
+              <input type="text" class="form-control"  ng-model="item.FamilleReference" placeholder="Entréz la référence de famille"/>
+              <a class="btn btn-primary" ui-sref="inventory.article.famillySelect" style="margin: 2px;">Choisir la famille..</a>
+
+          </form>
+        </div>
+      </div>
+    </pane>
+
+
+    <pane title="Complément">
+      <div class="row"><div class="col-md-12">
+          <form> 
+
+          <label>Unité </label>
+          <select ng-model="item.unite" class="form-control">
+            <option value="">Choisir l'unité</option>
+            <option value="unité">Unité</option>
+            <option value="m">Métre</option>
+            <option value="m2">m<sup>2</sup></option>
+            <option value="m3">m<sup>3</sup></option>
+            <option value="l">Litre</option>
+            <option value="g">Gramme</option>
+            <option value="kg">Kilogramme</option>
+            <option value="ton">Ton</option>
+                        
+            
+          </select>
+          </form>
+      </div></div>
+    </pane>
+    <pane title="Stock">
+      <div class="row">
+        <div class="col-md-12">
+          <form class="form">    
+         <label>Taxe </label><input type="text" class="form-control"  ng-model="item.taxe" placeholder="Entrez la taxe"/>
+
+          <label>Prix d'achat </label><input type="text" class="form-control" ng-model="item.prixAchat " placeholder="Entrez le prix d'achat"/>
+          <label>TVA </label><input type="text" class="form-control" ng-model="item.tva" placeholder="Entrez le tva"/>
+           <label>Prix Achat(Hors taxe)</label><input type="text" class="form-control" ng-model="item.prixAchatHT" placeholder="Entrez le prix unitaire de vente"/>
+                    
+          <label>Prix unitaire(Vente)</label><input type="text" class="form-control" ng-model="item.prixUnitaire" placeholder="Entrez le prix unitaire de vente"/>
+          
+          <label ng-show="User.isAdmin">Quantité  </label><input ng-show="User.isAdmin" type="text" class="form-control" ng-model="item.qReel" placeholder="Entrez la quantité réelle de votre article"/>
+          <!--<label>Quantité théorique </label><input type="text" class="form-control" ng-model="article.qTheorique" placeholder="Entrez la quantité théorique de votre article" />-->
+          <label>Quantité minimale </label><input type="text" class="form-control" ng-model="item.qMin" placeholder="Entrez la quantité minimale de votre article"/>
+          <!--<label>Quantité maximale </label><input type="text" class="form-control" ng-model="article.qMax" placeholder="Entrez la quantité maximale de votre article"/>-->
+           <label ng-show="User.isAdmin">Quantité périmée </label><input ng-show="User.isAdmin" type="text" class="form-control" ng-model="item.qPerime" placeholder="entrez la quantité périmée dans votre stock"/>  
+        </form>
+      </div>
+      </div>      
+    </pane>
+    <!--
+    <pane title="Prix/Tarifs">
+      <div class="row"><div class="col-md-12">This is the content of the second tab.</div></div>
+    </pane>
+    <pane title="Nomenclature">
+      <div class="row"><div class="col-md-12">This is the content of the second tab.</div></div>
+    </pane>
+    <pane title="Fournisseur(s)">
+      <div class="row"><div class="col-md-12">This is the content of the second tab.</div></div>
+    </pane>
+    <pane title="Comptabilité">
+      <div class="row"><div class="col-md-12">This is the content of the second tab.</div></div>
+    </pane>
+    <pane title="Observations">
+      <div class="row"><div class="col-md-12">This is the content of the second tab.</div></div>
+    </pane>
+    -->
+</tabs>
+</div>

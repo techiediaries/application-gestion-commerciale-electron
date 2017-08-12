@@ -1,0 +1,17 @@
+          <button ng-click="ctrl.printAll()" > Imprimer </button>
+          <button ng-click="ctrl.export2excel()" > Exporter </button>
+
+  
+          <a class="btn"  ng-click="ctrl.deleteSelected()" ng-show="User.isAdmin &&selections.length > 0"> Supprimer </a>
+          <a class="btn"  ng-click="ctrl.editSelected()" ng-show="selections.length > 0 && editMode === false"> Mode Edition </a>
+          <a class="btn" ng-click="ctrl.unEditSelected()" ng-show="editMode === true"> Annuller Edition </a>
+
+          <a class="btn" ng-click="ctrl.updateSelected()" ng-show="selections.length > 0 && editMode === true"> Enregistrer </a>
+          <a class="btn" ng-show="User.isAdmin" ng-click="ctrl.selectAll()" > Sélectionner Tout </a>
+          <a class="btn" ng-click="ctrl.unSelectAll()" ng-show="selections.length > 0"> Désélectionner Tout </a>
+          <!--<a class="btn" ng-show="selected.id" ng-show="hasDetails" ui-sref="{{ ctrl.getDetailsState() }}">Détails</a> -->
+
+     
+          <a class="btn" ng-click="ctrl.nextPage()" style="float: right;"> Suivant </a>
+          <a class="btn" ng-click="ctrl.prevPage()" style="float: right;"> Précedent </a>
+

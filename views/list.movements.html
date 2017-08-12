@@ -1,0 +1,46 @@
+<div class="row">
+        <div class="col-md-12">
+          <h1>Entrée/Sortie du stock</h1>
+        </div>
+ </div>
+<div class="row">
+    <div ng-include="'views/list.header.nextprev.html'" class="col-md-12">
+         
+    </div>
+    <div class="col-md-12">
+      <select class="form-control" ng-model="pageSize">
+          <option value="10">10</option>
+          <option value="20">20</option>
+          <option value="100">100</option>
+          <option value="1000">1000</option>
+          <option value="1000000">Tous</option>          
+       </select>       
+    </div>
+</div>
+<div class="row">
+  <div class="col-xs-12">
+ 
+              
+    <div class=" table-responsive ">
+                <table class="table table-hover">
+                  <tbody>
+                  <tr>
+                    <th>Libellé</th>
+                    <th>Article</th>
+                    <th>Cause</th>
+                    
+                    <th>Type</th>
+                    <th>Quantité</th>
+                  </tr>
+                  <tr ng-repeat="e in items" style="cursor: pointer;" ng-click="ctrl.handleClick(e)" ng-dblclick="ctrl.handleDoubleClick(e)" ng-class="{'row-selected':selections.indexOf(e) !== -1}">
+                    <td>{{e.libelle}}</td>
+                    <td>{{e.Article.reference}}</td>
+                    <td>{{e.cause}}</td>
+                    <td>{{e.type}}</td>
+                    <td><span class="label label-success">{{e.quantite}}</span></td>
+                  </tr>
+                </tbody></table>
+    </div>
+           
+  </div>            
+</div>

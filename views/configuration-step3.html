@@ -1,0 +1,25 @@
+<div class="">
+             <h1> <i class="fa fa-th"></i> Etape 3 : Paramétres de banque</h1> 
+            <div class="tab-content">
+              <div class="tab-pane active" id="tab_1-1">
+                
+                <p>
+                  <form>
+
+                      <label>Nom</label><input type="text" class="form-control" ng-model="bank.nom"></input>
+                      <label>Code SWIFT</label><input type="text" class="form-control" ng-model="bank.swift"></input>
+                      <label>Téléphone</label><input type="text" class="form-control" ng-model="banl.telephone"></input>
+                      <label>Addresse</label>
+                      <textarea ng-model="bank.addresse" class="form-control"></textarea> 
+                      <label>Fax</label><input type="text" class="form-control" ng-model="bank.fax"></input>
+                      <label>Représentant</label><input type="text" class="form-control" ng-model="bank.representant"></input>
+                  
+                  </form>
+                </p>
+                <button class="btn btn-primary" ng-click="conf.saveBank()">Enregistrer</button>                    
+                <button class="btn btn-primary" ng-click="conf.nextStep('conf.step4')">Etape suivante</button>                    
+
+                
+              </div>
+            </div>
+</div>

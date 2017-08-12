@@ -1,0 +1,69 @@
+    
+
+
+   <div class="row">
+    <div class="col-md-12">
+      <div class="box" style="padding: 10px;">
+          <a class="btn" ng-click="ctrl.close()" > Fermer </a>
+          <a class="btn" ng-click="ctrl.nextPage()" style="float: right;"> Suivant </a>
+          <a class="btn" ng-click="ctrl.prevPage()" style="float: right;"> Précedent </a>
+      </div>
+    </div>
+</div>  
+ <div class="row">
+    <div class="col-md-12" style="padding-bottom: 10px;">
+      <div class="box" style="padding: 10px;">
+
+        <select style="width: 47%;float: left;" class="form-control" ng-model="pageSize">
+              <option value="10">10</option>
+              <option value="20">20</option>
+              <option value="100">100</option>
+              <option value="1000">1000</option>
+              <option value="1000000">Tous</option>   
+          </select>
+          <input type="text" style="width: 50%;float: right;" ng-model="search" placeholder="Rechercher"  class="form-control" />
+
+          
+      </div>
+    </div>
+</div>  
+     <div class="row" >
+         <div class="col-xs-12" >
+            <div class="box" style="background: gray;">
+              <div class="box-header">
+                <h3 class="box-title"></h3>
+
+                <div class="box-tools">
+                </div>
+
+              </div>
+              <!-- /.box-header -->
+              <div class="box-body table-responsive " style="background: gray;">
+                <table class="table table-hover">
+                  <tbody>
+                  <tr>
+                    <th>ID</th>
+                    <th>Réference</th>
+                    <th>Désignation</th>
+                    <th>Libellé</th>
+                    <th>Prix unitaire</th>
+                    <th>Prix d'achat</th>
+                    
+                    <th>Quantité réelle</th>
+                  </tr>
+                  <tr ng-repeat="e in items" style="cursor: pointer;" ng-dblclick="ctrl.setSelectedAndClose(e.id)" ng-click="ctrl.setSelected(e.id)" ng-class="{'row-selected':selections.indexOf(e) !== -1}">
+                    <td>{{e.id}}</td>
+                    <td>{{e.reference}}</td>
+                    <td>{{e.designation}}</td>
+                    <td>{{e.libelle}}</td>
+                    <td>{{e.prixUnitaire}}</td>
+                    <td>{{e.prixAchat}}</td>
+                    <td><span class="label label-success">{{e.qReel}}</span></td>
+                  </tr>
+                </tbody></table>
+              </div>
+              <!-- /.box-body -->
+            </div>
+            <!-- /.box -->
+         </div>            
+      </div>

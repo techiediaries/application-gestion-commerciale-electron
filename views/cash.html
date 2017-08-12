@@ -1,0 +1,43 @@
+      <div class="row no-print">
+        <div class="col-md-12" style="text-transform: uppercase;margin-left:auto;text-align: center;margin-top:auto;">
+          
+              <h1 class="box-title">Gestion de caisse / banques</h1>
+
+              
+              <div class="row" ng-show="User.isAdmin">
+                <div class="col-xs-12">
+                  <a class="btn btn-app" ui-sref="cash.consult">
+                    <span class="badge bg-green">{{cashTotal  | currency:'د.م':0 }}</span>
+                    <i class="fa fa-list"></i>Consulter
+                  </a>
+                  <a class="btn btn-app" ui-sref="cash.load">
+                    <i class="fa fa-plus"></i> Alimenter/Retirer
+                  </a>
+                  <!--<a class="btn btn-app" ui-sref="cash.withdraw">
+                    <i class="fa fa-minus"></i> Retirer
+                  </a>-->
+                 <a class="btn btn-app" ui-sref="cash.listbanque">
+                    <i class="fa fa-list"></i> Banques
+                  </a>
+                  <a class="btn btn-app" ui-sref="cash.addbanque">
+                    <i class="fa fa-plus"></i> Ajouter banque
+                  </a>
+
+
+
+                </div>
+
+              </div>
+              
+        </div>
+        <!-- /.col -->
+      </div>
+</div>
+<div class="row">
+        <route-loading/>
+        <div ng-if='!isRouteLoading' class="col-md-12" ui-view>
+          
+          <!-- /.box -->
+        </div>
+        <!-- /.col -->
+      </div>

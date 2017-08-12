@@ -1,0 +1,145 @@
+<div class="row box" style="margin: 0 ; padding: 0;margin-left:auto;text-align: center;text-transform: uppercase; background: #fff">
+<div class="col-xs-12" >
+    <h3 style="text-transform: uppercase;background: #2baae2;color: white;">bienvenue sur eGestion Solution <span style="text-transform: lowercase;font-size: 18px;min-height: 100%;">v1.0</span> - {{now |  date:'medium'}}- </h3>
+    <h3 ng-show="isTrialEnd" style="text-transform: uppercase;background: red;color: white;">
+        période d'essai finie - <a ui-sref="trial">Clickez pour plus d'information</a> . 
+    </h3>
+    <hr>
+                  
+                    <a class="btn btn-app" ui-sref="pmgmt.providers" >
+                                    <span class="badge bg-green">{{ countOfProviders }}</span>
+                                    <i class="fa fa-bars" aria-hidden="true"></i> Afficher les Fournisseurs
+                    </a>
+                    <a class="btn btn-app" ui-sref="pmgmt.addprovider">
+                                    <i class="fa fa-plus-circle" aria-hidden="true"></i> Ajouter un fournisseur
+                    </a>
+                    <a class="btn btn-app" ui-sref="smgmt.clients">
+                    <span class="badge bg-green">{{ countOfCustomers }}</span>
+                            <i class="fa fa-bars"></i>
+                            Afficher les Clients
+                    </a>
+
+                    <a class="btn btn-app" ui-sref="smgmt.createClient">
+                            <i class="fa fa-plus-circle"></i>
+                            Ajouter un client
+                    </a>                    
+                    <a class="btn btn-app" ui-sref="inventory.articles">
+                                <span class="badge bg-green">{{countOfArticles}}</span>
+                                <i class="fa fa-list"></i>Afficher les Articles
+                    </a>
+                    <a class="btn btn-app" ui-sref="inventory.alertarticles">
+                                <span class="badge bg-red">{{countOfArticlesEnAlerte}}</span>
+                                <i class="fa fa-list"></i>Les Articles à commander
+                    </a>
+                    <a class="btn btn-app" ui-sref="inventory.article">
+                            <i class="fa fa-plus"></i> Créer un Article
+                    </a>                    
+                    <a class="btn btn-app" ui-sref="smgmt.createDevis">
+                           <i class="fa fa-cart-plus"></i>Créer un devis
+                    </a>
+                    <a class="btn btn-app" ui-sref="smgmt.addSaleOrder">
+                           <i class="fa fa-cart-plus"></i>Créer une commande de vente
+                    </a>
+                    <a class="btn btn-app" ui-sref="smgmt.listSaleOrder">
+                    <span class="badge bg-green">{{ countOfSalesOrders }}</span>
+                            <i class="fa fa-bars"></i> Afficher les commandes de ventes
+                    </a>
+
+                    <a class="btn btn-app" ui-sref="pmgmt.porder">
+                                    <i class="fa fa-cart-plus" aria-hidden="true"></i> Créer une commande d'achat
+                    </a>
+                    <a class="btn btn-app" ui-sref="pmgmt.list">
+                                    <span class="badge bg-green">{{ countOfOrders }}</span>
+                                    <i class="fa fa-server" aria-hidden="true"></i> Afficher les commandes d'achat
+                    </a>
+
+                    <!--<a class="btn btn-app" ui-sref="pmgmt.delivery">
+                                    <i class="fa fa-cart-plus" aria-hidden="true"></i> Saisir bon de livraison
+                    </a>
+
+                    <a class="btn btn-app" ui-sref="pmgmt.deliveries">
+                                    <span class="badge bg-green">{{ countOfDeliveryForms }}</span>
+                                    <i class="fa fa-server" aria-hidden="true"></i> Bons de livraisons
+                    </a>
+                    <a class="btn btn-app" ui-sref="pmgmt.invoice">
+                                    <i class="fa fa-cart-plus" aria-hidden="true"></i> Saisir facture
+                    </a>
+
+                    <a class="btn btn-app" ui-sref="pmgmt.invoices">
+                                    <span class="badge bg-green">{{ countOfInvoices }}</span>
+                                    <i class="fa fa-server" aria-hidden="true"></i> Factures
+                    </a>
+                    <a class="btn btn-app" ui-sref="pmgmt.reglement">
+                                    <i class="fa fa-cart-plus" aria-hidden="true"></i> Ajouter réglement
+                    </a>
+
+                    <a class="btn btn-app" ui-sref="pmgmt.reglements">
+                                    <span class="badge bg-green">{{ countOfReglements }}</span>
+                                    <i class="fa fa-server" aria-hidden="true"></i> Réglements
+                    </a>-->
+                    <a class="btn btn-app" ui-sref="smgmt.jsales" ng-show="User.isAdmin" >
+                            <span class="badge bg-green">{{ countOfSalesJournal }}</span>
+                            <i class="fa fa-bars"></i> Afficher le Journal de ventes
+                    </a>
+                    <a class="btn btn-app" ui-sref="smgmt.jclients"  ng-show="User.isAdmin">
+                    <span class="badge bg-green">{{ countOfCustomerJournal }}</span>
+                            <i class="fa fa-bars"></i> Afficher le Journal de ventes/client
+                    </a>
+                    <a class="btn btn-app" ui-sref="pmgmt.journal"  ng-show="User.isAdmin">
+                                    <span class="badge bg-green">{{ countOfJournal }}</span>
+                                    <i class="fa fa-server" aria-hidden="true"></i> Afficher le Journal d'achats
+                    </a>
+                    <a class="btn btn-app" ui-sref="pmgmt.journalprovider"  ng-show="User.isAdmin">
+                                    <span class="badge bg-green">{{ countOfProviderJournal }}</span>
+                                    
+                                    <i class="fa fa-server" aria-hidden="true"></i> Afficher le Journal d'achats/Fournisseur
+                    </a>
+                    <a class="btn btn-app" ui-sref="cash.consult"  ng-show="User.isAdmin">
+                                    <span class="badge bg-green">{{ countOfCaisseJournal }}</span>
+                                    
+                                    <i class="fa fa-server" aria-hidden="true"></i> Consulter la CAISSE
+                    </a>
+
+
+       
+  </div>
+  <div class="col-xs-12">
+
+        <!--<a class="btn btn-app" ui-sref="smgmt.listDevis">
+               
+                <i class="fa fa-bars"></i>Devis..
+        </a>-->
+        <!--<a class="btn btn-app" ui-sref="smgmt.delivery">
+               <i class="fa fa-cart-plus"></i>Créer un BL
+        </a>
+
+
+        <a class="btn btn-app" ui-sref="smgmt.deliveries">
+                <i class="fa fa-bars"></i> Bons de livraison..
+        </a>-->
+
+
+        <!--<a class="btn btn-app" ui-sref="smgmt.invoice">
+               <i class="fa fa-cart-plus"></i>Créer une facture
+        </a>
+
+        <a class="btn btn-app" ui-sref="smgmt.invoices">
+                <i class="fa fa-bars"></i> Factures..
+        </a>
+
+        <a class="btn btn-app" ui-sref="smgmt.reglement">
+                <i class="fa fa-plus"></i> Ajouter réglements
+        </a>-->
+
+  </div>
+  <!--<div class="col-xs-6">
+    <canvas  class="chart chart-bar" chart-data="dayData" chart-labels="dayLabels" 
+    chart-series="daySeries" chart-click="onClick"></canvas> 
+  </div>
+  <div class="col-xs-6">
+    <canvas  class="chart chart-bar" chart-data="data" chart-labels="labels" 
+    chart-series="series" chart-click="onClick"></canvas> 
+  </div>-->
+
+</div>
+

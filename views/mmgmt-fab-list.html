@@ -1,0 +1,34 @@
+ <div class="row">
+        <div class="col-md-12">
+        	<h1>Fabrications</h1>
+        </div>
+ </div>
+      <div class="row">
+         <div class="col-xs-12">
+          
+              
+              <!-- /.box-header -->
+              <div class="box-body table-responsive ">
+                <table class="table table-hover">
+                  <tbody>
+                  <tr>
+                    <th>ID</th>
+                    <th>Reference</th>
+                    <th>A Fabriquer</th>
+                    <th>Quantité</th>
+                    <th>Etat</th>
+                    
+                  </tr>
+                  <tr ng-repeat="e in items">
+                    <td>{{e.id}}</td>
+                    <td>{{e.reference}}</td>
+                    <td><span class="label label-success">{{e.ArticleId}}</span></td>
+                    <td>{{e.quantite}}</td>
+                    <td><span class="label label-info">{{e.etat}}</span></td>
+                    
+                  </tr>
+                </tbody></table>
+              </div>
+            
+         </div>            
+      </div>

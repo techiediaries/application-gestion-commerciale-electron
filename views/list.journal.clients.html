@@ -1,0 +1,68 @@
+ <div class="row">
+        <div class="col-md-12">
+          <h1>Journal de clients</h1>
+        </div>
+ </div>
+ <div class="row">
+   <div ng-include="'views/list.header.nextprev.html'" class="col-md-12">
+         
+    </div>
+    <div class="col-md-2">
+      <select class="form-control" ng-model="pageSize">
+          <option value="10">10</option>
+          <option value="20">20</option>
+          <option value="100">100</option>
+          <option value="1000">1000</option>
+          <option value="1000000">Tous</option>          
+       </select>       
+    </div>
+    <div class="col-md-2">
+      <input placeholder="Début de période" class="form-control" type="text" onfocus="(this.type='date')" 
+       ng-model="startPeriod" value="{{ startPeriod | date: 'yyyy-MM-dd' }}"> 
+    </div>
+    <div class="col-md-2">
+      <input placeholder="Fin de période" class="form-control" type="text" onfocus="(this.type='date')" 
+       ng-model="endPeriod" value="{{ endPeriod | date: 'yyyy-MM-dd' }}"> 
+    </div>
+ 
+    <div class="col-md-3">
+      <a class="btn btn-primary" ui-sref="smgmt.jclients.selectc" style="padding-left:1px;margin-left:2px;text-transform: uppercase;width: 100%;"> Sélectionner le client</a>
+    </div>
+    <div class="col-md-3">
+      <!--<input style="width: 100%" ng-model="client.reference" class="form-control" /> -->
+      <p>{{client.reference}} | {{client.nom}}</p>
+    </div>    
+    
+</div>  
+<div class="row">
+         <div class="col-xs-12" ui-view>
+            <div class="box-body table-responsive ">
+                <table class="table table-hover">
+                  <tbody>
+                  <tr>
+                    <th>N</th>
+                    <th>Libellé</th>
+                    <th>Débit</th>
+                    <th>Crédit</th>
+                    <th>Total</th>
+                   
+                  </tr>
+                  <tr ng-repeat="e in items track by $index" ng-click="ctrl.setSelected(e.id)" style="cursor: pointer;" ng-class="{'row-selected':selections.indexOf(e) !== -1 , 'row-zero' : e.balance === 0 }">
+                    <td>{{e.id}}</td>
+                    <td><p compile-html="e.libelle"></p> </td>
+                    <td>{{e.debit}}</td>
+                    <td>{{e.credit}}</td>
+                    <td>{{e.balance}}</td>
+                  </tr>
+                  <tr>
+                    <th></th>
+                    <th>Total</th>
+                    <th>{{ totalDebit() }}</th>
+                    <th>{{ totalCredit() }}</th>
+                    <th>{{ items[0].balance }}</th>
+                  </tr>    
+
+                </tbody></table>
+              </div>
+          </div>            
+</div>

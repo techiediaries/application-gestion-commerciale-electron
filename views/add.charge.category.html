@@ -1,0 +1,20 @@
+ <div class="row">
+        <div class="col-md-12">
+        	 <h1>Ajouter des catégories de charges </h1>
+        </div>
+ </div>
+ <div class="row">
+    <div class="col-md-12">
+      
+          <button class="btn" ng-click="ctrl.clear()"> Nouveau .. </button> 
+          <button class="btn" ng-click="ctrl.add()" ng-disabled="item.name === undefined || item.name === ''"> Ajouter </button> 
+    </div>
+</div>     
+      <div class="row">
+        <div class="col-md-12">
+          <form class="form">
+              <label>Nom</label><input type="text" class="form-control" ng-model="item.name" placeholder="entrez le nom de  catégorie"/>            
+              <label>Description</label><input type="text" class="form-control" ng-model="item.description" placeholder="entrez une description de catégorie"/>
+          </form>
+        </div>
+      </div>

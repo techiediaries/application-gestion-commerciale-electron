@@ -1,0 +1,25 @@
+<div class="">
+             <h1> <i class="fa fa-th"></i> Etape 4 : Journaux comptable</h1> 
+            <div class="tab-content">
+              <div class="tab-pane active" id="tab_1-1">
+                
+                <p>
+                  <form>
+
+                      <label>Code</label><input type="text" class="form-control" ng-model="journal.code"></input>
+                      <label>Libellé</label><input type="text" class="form-control" ng-model="journal.libelle"></input>
+                      <label>Début de période </label><input type="date" class="form-control" ng-model="journal.debutPeriod"></input>
+                      <label>Fin de période </label><input type="date" class="form-control" ng-model="journal.finPeriod"></input>
+                      
+                      <label>Description</label>
+                      <textarea ng-model="journal.description" class="form-control"></textarea> 
+                  
+                  </form>
+                </p>
+                <button class="btn btn-primary" ng-click="conf.saveJournal()">Enregistrer</button>                    
+                <button class="btn btn-primary" ng-click="conf.quit()">Quitter</button>                    
+
+                
+              </div>
+            </div>
+</div>

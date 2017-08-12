@@ -1,0 +1,137 @@
+<div class="row no-print" ng-class = "{ topified : hideHeader }" >
+    <div class="col-md-12 no-print" style="padding-top: 1px;padding-bottom: 5px;text-decoration: uppercase;"> 
+      
+          <button class="btn" ng-click="ctrl.clear()"> Nouvelle..</button> 
+          <button class="btn" ng-click="ctrl.add()" ng-show="!item.id" ng-disabled="item.reference === undefined || item.reference === ''"> Enregistrer </button> 
+          <button class="btn" ng-click="ctrl.update()" ng-show="item.id" ng-disabled="item.reference === undefined || item.reference === '' || item.facturee === true || item.livree === true"> Modifier 
+
+
+
+          </button> 
+         <button class="btn" ng-click="ctrl.hideCompanyDetails()"> Cacher les info de société </button>
+          <button class="btn" ng-click="ctrl.showCompanyDetails()"> Afficher les info de société </button>
+
+          <button class="btn" ng-click="ctrl.print()"> Imprimer</button> 
+          <button class="btn" ng-disabled="!item.id || item.livree "  ng-click="ctrl.receive()"> RECEVOIR </button> 
+          <button class="btn" ng-disabled="!item.id || item.facturee"  ng-click="ctrl.invoice()"> FACTURER </button> 
+          
+          <button class="btn" ng-click="hideIt()" ng-show="!hideHeader">Masquer la barre ^ </button>
+          <button class="btn" ng-click="showIt()" ng-show="hideHeader">Afficher la barre </button>
+          
+          
+    </div>
+    <div class="col-md-12">
+      <p>
+          <span style="background: red;text-transform: uppercase;color: white;" ng-show="item.facturee === true || item.livree === true">Impossible de modifier-Commande déja livrée / facturée </span>
+      </p>
+    </div>
+</div>     
+<div  class="row toprint print-paper-a4" id="mypage">
+    <div class="col-md-12">
+    <div class="box" ui-view>
+    <div class="box-header with-border">
+                  <header>
+              <h1 style="border: 1px dashed black;">BON DE COMMANDE</h1>
+              <div ng-show="company.raisonSociale">
+                <address style="font-size: 16px;">
+                  <p contenteditable="true" ng-model="company.raisonSociale" ng-attr-contenteditable="{{ editMode }}"></p>
+                  <p contenteditable="true" style="font-size: 12px;" ng-model="company.addresse" ng-attr-contenteditable="{{ editMode }}"></p>
+                  <!--<p contenteditable="true" ng-model="company.codePostal" ng-attr-contenteditable="{{ editMode }}"></p>
+                  <p contenteditable="true" ng-model="company.ville" ng-attr-contenteditable="{{ editMode }}"></p>
+                    -->
+                </address>
+                <span><img alt=""  ng-show="company.logo" id="logo" ng-src="{{ company.logo }}"><input style="width:20px;height:10px;" type="file" id="logoInput" accept="image/*" /></span>
+              </div>
+            </header>
+  
+
+    <article>
+      
+      <table class="">
+        <tr>
+          <th style="width: 20%;border-width: 0px;"><span>Numéro</span></th>
+          <td style="width: 30%;"><span contenteditable="true" ng-model="item.reference" ng-attr-contenteditable="true"></span></td>
+        </tr>
+        <tr>
+          <th style="width: 20%;border-width: 0px;"><span >Le</span></th>
+          <td style="width: 30%;"><input type="date" ng-model="item.date"/></span></td>
+        </tr>
+        <tr>
+          <th style="width: 20%;border-width: 0px;"><span ><a ui-sref="pmgmt.porder.selectprovider">Fournisseur</a></span></th>
+          <td style="width: 30%;"><span >
+            {{fournisseur.reference}} - {{fournisseur.nom}}
+          </span>
+
+          </td>
+
+        </tr>
+
+       <!-- <tr>
+          <th><span >A</span></th>
+          <td><span id="prefix" contenteditable="true" ng-attr-contenteditable="true" ng-model="command.villeSociete">
+            {{command.villeSociete}}
+          </span></td>
+        </tr>-->
+      </table>
+      <table class="inventory">
+        <thead>
+          <tr>
+            <th><span >Article</span></th>
+            <th><span >Désignation</span></th>
+            
+          
+            <th><span >Quantité</span></th>
+            
+            <th class="no-print" ng-show="item.id"><span >Prix d'achat</span></th>
+            
+            <th><span >Observation</span></th>
+          </tr>
+        </thead>
+        <tbody>
+          
+          <tr ng-repeat="it in item.items track by $index" ng-dblclick="removeItem(it)">
+
+            <td><span style="text-align: center;cursor:  not-allowed;" contenteditable="false" ng-model="it.reference">{{it.reference}}</span></td>
+            <td><span style="text-align: center;cursor:  not-allowed;" contenteditable="false" ng-model="it.designation">{{it.designation}}</span></td>
+
+            <td><span style="text-align: center;" contenteditable="true" ng-model="it.quantite" ng-attr-contenteditable="true">{{it.quantite}}</span><span style="margin-left : 10px;color: green">{{it.unite}}</span></td>
+            
+            <td class="no-print" ng-show="item.id"><span style="float: left;text-align: left;" contenteditable="true" ng-model="it.prixAchat" ng-attr-contenteditable="true">{{it.prixAchat}}</span></td>
+            
+            <td><span style="float: left; text-align: left;" contenteditable="true" ng-model="it.description" ng-attr-contenteditable="true">{{it.description}}</span></td>
+            
+          </tr>
+        </tbody>
+      </table>
+      <a ng-hide="item.facturee === true || item.livree === true" class="btn btn-primary no-print" ui-sref="pmgmt.porder.selectArticle">+</a>
+      <table class="balance">
+        <tr>
+          <th style="border-width: 0px;"><span >Signature</span></th>
+          <td style="border-width: 0px;"></td>
+        </tr>
+      </table>
+    </article>
+          <br>
+      <span class="no-print" style="background: green;color: white;text-transform: uppercase;">Somme à payer : {{ calculateSubTotal()}}</span> 
+    
+<div class="docfooter">
+            <div class="docfooter1" ng-show="company.footer">
+              <h1><span >Notes Additionnelles</span></h1>
+              <div  contenteditable="true" ng-model="item.notes" ng-attr-contenteditable="true">
+                <p>Nous restons à votre disposition pour toute information complémentaire.</p>
+                <p>Cordialement.</p>
+              </div>
+            </div>
+            <div  ng-show="company.footer" style="margin: auto;text-align: center;">
+              
+              <div contenteditable="true" ng-model="company.footer" ng-attr-contenteditable="true">
+              {{company.footer}}  
+              </div>
+            </div>            
+</div>
+
+
+</div>
+</div>
+</div>
+</div>    

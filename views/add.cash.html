@@ -1,0 +1,25 @@
+ <div class="row">
+        <div class="col-md-12">
+        	 <h1>Opérations sur le caisse </h1>
+        </div>
+ </div>
+ <div class="row">
+    <div class="col-md-12">
+      
+          <button class="btn" ng-click="ctrl.clear()"> Nouveau </button> 
+          <button class="btn" ng-click="ctrl.add()" > Ajouter </button> 
+    </div>
+</div>     
+      <div class="row">
+        <div class="col-md-12">
+          <form class="form">
+             
+              <label>Crédit</label><input type="text" class="form-control" ng-model="item.credit" placeholder="entrez le crédit "/>
+              <label>Débit</label><input type="text" class="form-control" ng-model="item.debit" placeholder="entrez le débit "/>
+
+              <label>Libellé</label><input type="text" class="form-control" ng-model="item.libelle" placeholder="entrez un libéllé "/>
+              <label>Date</label><input type="date" class="form-control" ng-model="item.date" />
+
+          </form>
+        </div>
+      </div>

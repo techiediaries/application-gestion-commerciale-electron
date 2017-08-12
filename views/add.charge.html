@@ -1,0 +1,35 @@
+ <div class="row">
+        <div class="col-md-12">
+        	 <h1>Ajouter des charges </h1>
+        </div>
+ </div>
+ <div class="row">
+    <div class="col-md-12">
+      
+          <button class="btn" ng-click="ctrl.clear()"> Nouveau .. </button> 
+          <button class="btn" ng-click="ctrl.add()" ng-disabled="item.montant === undefined || item.montant === ''"> Ajouter </button> 
+    </div>
+</div>     
+      <div class="row">
+        <div class="col-md-12">
+          <form class="form">
+             
+              <label>Type</label>
+              
+              <select class="form-control" ng-model="item.CategorieChargeId">
+                <option value=""> Choisir type</option>
+                <option ng-repeat="c in categories" value="{{c.id}}">{{c.name}}</option>
+              </select>
+              <label>Montant</label><input type="text" class="form-control" ng-model="item.montant" placeholder="entrez le montant"/>
+              <label>Méthode de paiement</label>
+              <select class="form-control" ng-model="item.paiement">
+                    <option value="espéces">Espéces</option>
+                    <option value="chéque">Chéque</option>
+              </select>
+
+ <label>Date </label><input class="form-control" type="date" ng-model="item.date" />
+ <label>Description </label><textarea class="form-control" ng-model="item.description" placeholder="entrez une description"></textarea>
+ 
+          </form>
+        </div>
+      </div>
