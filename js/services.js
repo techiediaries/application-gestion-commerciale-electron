@@ -894,7 +894,8 @@ angular.module('gCom.services', [])
 
             var r = {
                 reference : prefix + (l + 1),
-                count : l 
+                count : l ,
+                id : l + 1 
             }
             deferred.resolve(r);
         });
@@ -1067,12 +1068,12 @@ angular.module('gCom.services', [])
                 DBService.getById('Article',id).then(function(a){
                   
                   var ar = {
-                    qReel : a.qReel - parseInt(v)
+                    qReel : a.qReel - parseFloat(v)
                   };
                     DBService.create('Movement',{
                       type:'sortie',
                       ArticleId:a.id,
-                      quantite:parseInt(v)
+                      quantite:parseFloat(v)
                     }).then(function(){
                         DBService.update('Article',ar,id);  
                     });                

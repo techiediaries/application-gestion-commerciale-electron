@@ -288,6 +288,13 @@ angular.module('gCom.controller').controller('AddSaleDocumentController',functio
                  var message = "Commande réglée avec succés !";
                  Flash.create('success', message, 0, {class: 'custom-class', id: 'custom-id'}, true);                   
               });
+           }else
+           {
+              DBService.update('LivraisonVente',{payee:true,datePayee : new Date()},$scope.item.id).then(function(d){
+                 $scope.item.payee = true;
+                 var message = "Commande réglée avec succés !";
+                 Flash.create('success', message, 0, {class: 'custom-class', id: 'custom-id'}, true);                   
+              });             
            }
 
         });

@@ -25,6 +25,13 @@ angular.module('gCom.controller').controller('ListArticleController',function ($
 
 
    }	  
+   $scope.calculateTotal = function(){
+	   var t = 0;
+	   angular.forEach($scope.items,function(e,k){
+		   t += e.qReel * e.prixAchat; 
+	   });
+	   return t;
+   }
     base.getInitialArticlePage = function getInitialArticlePage(){
 	    DBService.reset();
 	    DBService.getArticlePager(base.getModel(),parseInt($scope.pageSize),$scope.familly).then(function(o){

@@ -295,7 +295,63 @@ angular.module('gCom.controller').controller('ListBaseController',function ($sco
    ctrl.unSelectAll = function(){
       $scope.selections = [];
    }
+   ctrl.encaisseSelected = function(){
+      var success = false;
+      var id = 0;
+                 DBService.getCounter('Reglement','RE').then(function(r){
+                  if(r){
+                      id = r.id;
+                  }
 
+             $scope.selections.forEach(function (e,k) {
+
+
+                    var reg = {
+                        reference : 'RE'+id,
+                        sommeHT : e.sommeHT,
+                        tva : e.tva,
+                        taxe : e.taxe,
+                        date : new Date(),
+                        acceptee :e.acceptee,
+                        livree : e.livree,
+                        facturee : e.facturee,
+                        somme: e.somme,
+                        paiement : e.paiement,
+                        notes : e.notes,
+                        type : "vente",
+                        ClientId : e.ClientId || null
+
+                      }
+                      id++;
+                      DBService.create('Reglement',reg).then(function(c){
+
+                            DBService.update('LivraisonVente',{payee:true,datePayee : new Date()},e.id).then(function(d){
+                              
+
+                              success = true;
+                              if(success){
+
+                                  $scope.selections.forEach(function (e,k) {
+                                      e.payee = true;
+                                  });  
+                                  var message = "BL réglé avec succés !";
+                              Flash.create('success', message, 0, {class: 'custom-class', id: 'custom-id'}, true);                   
+                            }
+
+                            });           
+                      });
+                      
+
+
+              });
+
+                 });              
+ 
+
+
+             
+                 
+   }
    ctrl.deleteSelected = function(){
         var dlg = dialogs.confirm('Opération de suppression','Volulez vous  supprimer  ' + $scope.selections.length + ' élement(s) sélectionné(s) ?');
         dlg.result.then(function(btn){

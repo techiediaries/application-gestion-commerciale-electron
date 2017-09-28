@@ -55,9 +55,9 @@ module.exports = function(sequelize, DataTypes) {
           Article.findById(id).then(function(a){
             p = p || 0;
             var obj = {
-              qReel : a.qReel - parseInt(q),
-              qTheorique : a.qTheorique  - parseInt(q),
-              qPerime : a.qPerime + parseInt(p)
+              qReel : a.qReel - parseFloat(q),
+              qTheorique : a.qTheorique  - parseFloat(q),
+              qPerime : a.qPerime + parseFloat(p)
             }
             return Article.update(obj,{where:{id:id}});
           })

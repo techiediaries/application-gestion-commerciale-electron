@@ -4,7 +4,7 @@
     <div class="col-md-12" style="padding: 10px;">
       
           <button class="btn" ng-click="ctrl.clear()"> Nouveau</button> 
-          <button class="btn" ng-click="ctrl.add()"  ng-hide="item.id" ng-disabled="item.id || item.reference === undefined || item.reference === '' || item.payee "> Enregistrer</button>
+          <button class="btn" ng-click="ctrl.add()"  ng-hide="item.id" ng-disabled="item.id || item.reference === undefined || item.reference === '' || item.payee || client.reference === undefined || client.reference === '' || item.date === undefined || item.date === ''"> Enregistrer</button>
              
           <button class="btn" ng-click="ctrl.update()"  ng-show="item.id" ng-disabled="item.reference === undefined || item.reference === '' || item.payee "> Mettre à Jour</button>
         
@@ -17,7 +17,7 @@
           <label ng-show="item.payee" style="background: red;text-transform: uppercase;">Payé</label>
       
       </div>
-    
+     
 </div>    
 
 <div class="row toprint print-paper-a4" id="mypage" >

@@ -184,6 +184,7 @@ angular.module('gCom.controller').controller('AddPurchaseDeliveryFormController'
               $scope.item.items.push({
 
                 reference:v.Article.reference,
+                designation : v.Article.designation,
                 quantite:v.quantite,
                 prixAchat:v.Article.prixAchat,
                 description:v.description

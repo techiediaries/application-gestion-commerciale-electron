@@ -55,7 +55,7 @@
                     <th>Quantité Min</th>
                     
                     <th>Quantité périmée</th>
-
+                    <th>Total achats</th>  
                     
                   </tr>
                   <tr ng-repeat="e in items" style="cursor: pointer;" ng-click="ctrl.handleClick(e)" ng-dblclick="ctrl.handleDoubleClick(e)" ng-class="{'row-selected':selections.indexOf(e) !== -1}">
@@ -77,12 +77,12 @@
                     
 
                     <td contenteditable="true" ng-model="e.qPerime" ng-attr-contenteditable="{{ editMode }}">{{e.qPerime}}</td>
-                    
+                    <td style="text-align: left;"><span>{{ e.prixAchat * e.qReel }}</span></td>
 
                   </tr>
                 </tbody></table>
               
-              
+                <span>Total Achats : </span><span>{{calculateTotal()}}</span>
             <!-- /.box -->
          </div>            
       </div>

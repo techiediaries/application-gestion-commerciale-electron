@@ -38,7 +38,7 @@ function createMenu(){
           'click':function(){
             app.quit();
           }
-    }/*,
+    },
       {
           'label':'Déboguer',
           'accelerator': 'CmdOrCtrl+R',
@@ -46,7 +46,7 @@ function createMenu(){
           'click':function(){
             activate();
           }
-      }*/
+      }
       ]
     },
     {
@@ -87,6 +87,8 @@ function createMenu(){
   Menu.setApplicationMenu(menu)
 
 }
+
+
 function createSplashWindow(){
     var startTime = Date.now();
     splashWindow = new BrowserWindow({width: 500,height: 500,backgroundColor: '#2e2c29',frame:false,show:false})
@@ -117,6 +119,8 @@ function createAppWindow(){
       setTimeout(function(){
           shown = true;
           mainWindow.show();
+
+
       
       },500);
       

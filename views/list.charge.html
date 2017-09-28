@@ -27,6 +27,7 @@
                     <th>Type</th>
                     <th>Description</th>
                     <th>Montant</th>
+                    <th>Date</th>
                     
                   </tr>
                   <tr ng-repeat="e in items" style="cursor: pointer;" ng-click="ctrl.handleClick(e)" ng-dblclick="ctrl.handleDoubleClick(e)" ng-class="{'row-selected':selections.indexOf(e) !== -1}">
@@ -34,6 +35,7 @@
                     <td>{{e.CategorieCharge.name}}</td>
                     <td>{{e.description}}</td>
                     <td><span class="label label-success">{{e.montant}}</span></td>
+                    <td>{{e.date | date }}</td>
                     
                   </tr>
                 </tbody></table>

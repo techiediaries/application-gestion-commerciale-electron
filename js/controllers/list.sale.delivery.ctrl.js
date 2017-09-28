@@ -22,6 +22,7 @@ angular.module('gCom.controller').controller('ListSaleDeliveryController',functi
 					{
 						$scope.items.push(r[i]);
 					}
+					console.log($scope.items);
 					
 					$scope.$apply();
 			});
@@ -107,6 +108,7 @@ angular.module('gCom.controller').controller('ListSaleDeliveryController',functi
 				if($scope.startPeriod && $scope.startPeriod !== '')
 				getInitialPage2();
 			});			
+			console.log($scope.items);
 	}
 	ctrl.prevPage = function(){
 			ctrl.pager.prevPage().then(function(r){

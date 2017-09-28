@@ -75,11 +75,14 @@
         <thead>
           <tr>
             <th><span >Article</span></th>
+            <th><span >Désignation</span></th>
           
             <th><span >Quantité</span></th>
             <th><span >Prix Achat </span></th>
             
             <th><span >Observation</span></th>
+            <th><span >Total</span></th>
+            
           </tr>
         </thead>
         <tbody>
@@ -87,11 +90,13 @@
           <tr ng-repeat="it in item.items track by $index" ng-dblclick="removeItem(it)">
 
             <td><span style="text-align: center;cursor:  not-allowed;" contenteditable="false" ng-model="it.reference">{{it.reference}}</span></td>
+            <td><span style="text-align: center;cursor:  not-allowed;" contenteditable="false" ng-model="it.designation">{{it.designation}}</span></td>
+            
             <td><span style="text-align: center;" contenteditable="true" ng-model="it.quantite" ng-attr-contenteditable="true">{{it.quantite}}</span></td>
             <td><span style="float: left; text-align: left;" contenteditable="true" ng-model="it.prixAchat" ng-attr-contenteditable="true">{{it.prixAchat}}</span></td>
             
             <td><span style="float: left; text-align: left;" contenteditable="true" ng-model="it.description" ng-attr-contenteditable="true">{{it.description}}</span></td>
-            
+             <td style="text-align: left;"><span>{{ it.prixAchat * it.quantite }}</span></td>
           </tr>
         </tbody>
       </table>

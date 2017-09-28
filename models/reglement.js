@@ -29,8 +29,12 @@ module.exports = function(sequelize, DataTypes) {
       }
     }
   });
+  PO.beforeCreate(function(model, options, cb) {
+
+    return cb(null,options);
+  });
   PO.afterCreate(function(model, options, cb) {
-    
+      
 
     var credit = model.somme;
     //var debit = model.avance;
