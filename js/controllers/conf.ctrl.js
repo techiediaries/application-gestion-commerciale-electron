@@ -9,6 +9,7 @@ angular.module('gCom.controller').controller('SettingsCtrl',function($scope,$roo
   var oldConfig = null;
   $scope.config = {};
   $scope.dbReady = false;
+  $scope.config.dbType = "sqlite";
   $scope.company = {};
   $scope.company.ice = "001437356000021";
   $scope.bank = {};
@@ -26,6 +27,7 @@ angular.module('gCom.controller').controller('SettingsCtrl',function($scope,$roo
     $scope.config = config;
     oldConfig = config;
     $rootScope.config = config;
+    $scope.dbReady = true;
     console.log($scope.config);
   }
   /*if($scope.config && $scope.config.dbCreated)
@@ -142,6 +144,12 @@ angular.module('gCom.controller').controller('SettingsCtrl',function($scope,$roo
         });
 
   }
+  conf.deleteConfiguration = function(){
+    window.localStorage.removeItem('config');
+    $scope.config = {};
+    $scope.dbReady = false;
+    $scope.config.dbType = "sqlite";
+  }
   conf.saveConfiguration = function(){
       var models = require('./models');
       console.log('saving conf ' + JSON.stringify($scope.config));
@@ -149,10 +157,11 @@ angular.module('gCom.controller').controller('SettingsCtrl',function($scope,$roo
       {
          window.localStorage.setItem('config',JSON.stringify($scope.config));  
          models.init();
+         $scope.dbReady = true;
       }
       
       
-      if( $scope.config && !$scope.dbReady)
+      if( $scope.config )
       {
         models.sequelize.sync().then(function (db) {
             $scope.config.dbCreated = true;
@@ -256,6 +265,22 @@ angular.module('gCom.controller').controller('SettingsCtrl',function($scope,$roo
       if($rootScope.Company)
       {
         $scope.company = $rootScope.Company;
+      }
+      else
+      {
+        DBService.getById('Societe',1).then(function(c){
+          if(c)
+          {
+              console.log("company:"+ c);
+              $scope.company = c;
+              $rootScope.Company = c;
+              $scope.$apply();
+          }
+          else
+          {
+             $scope.company = {};
+          }
+        });      
       }
       //$scope.$apply();
   }

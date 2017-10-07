@@ -33,14 +33,31 @@ function setup(){
       
     sequelize = new Sequelize(config.dbName || '', config.username || '', config.password || '',{
     host: config.server || '127.0.0.1',
-    dialect:config.dbType || 'mysql',
+    dialect:config.dbType || 'sqlite',
     pool: {
       max: 5,
       min: 0,
       idle: 10000
-    },logging: console.log.bind(console)
+    },logging: console.log.bind(console),
+    storage: './../database.sqlite'
+  });
+ /* config.dbName = 'database';
+  config.username = 'root';
+  config.password = 'jb395566';
+  const sequelize = new Sequelize('database', 'username', 'password', {
+    host: 'localhost',
+    dialect: 'sqlite',
+  
+    pool: {
+      max: 5,
+      min: 0,
+      idle: 10000
+    },
+  
+    // SQLite only
+    storage: './../../database.sqlite'
+  });*/
 
-  }); 
   o.config = config || {};
   o.sequelize = sequelize || {};
   o.Sequelize = Sequelize;

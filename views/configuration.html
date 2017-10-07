@@ -1,9 +1,4 @@
 
-<div >
-  <a ui-sref="conf">Etape 1 > </a>
-  <a ui-sref="conf.step2">Etape 2</a>
-  
-</div>
 <div ui-view>
 <!--<div ng-hide="User.isAdmin">
   <p>
@@ -20,8 +15,9 @@
                 <p>
                   Indiquez le type de base de données que vous voulez utiliser <select class="form-control" ng-model="config.dbType" ng-disabled="config.expired && !config.activated">
                     <!--<option>sqlite</option>-->
-                    <option>mysql</option>
-                    <option>postgresql</option>
+                    <option value="sqlite">sqlite</option>
+                    <option value="mysql">mysql</option>
+                    <option value="postgresql">postgresql</option>
                   </select>
                 </p>
 
@@ -31,21 +27,23 @@
                   <p>Entrez les informations de connexion  à la base de données  .
                   <form  >
 
-                  <label>Serveur</label><input type="text" class="form-control" ng-model="config.server" ng-disabled="config.expired && !config.activated"></input>
+                  <label>Serveur</label><input type="text" class="form-control" ng-disabled="config.dbType ==='sqlite' " ng-model="config.server" ng-disabled="config.expired && !config.activated"></input>
 
-                  <label>Nom d'utilisateur</label><input type="text" class="form-control" ng-model="config.username" ng-disabled="config.expired && !config.activated"></input>
-                  <label>Mot de passe</label><input type="password" class="form-control" ng-model="config.password" ng-disabled="config.expired && !config.activated"></input> 
-                  <label>base de données </label><input type="text" class="form-control" ng-model="config.dbName" ng-disabled="config.expired && !config.activated"></input> 
+                  <label>Nom d'utilisateur</label><input type="text" class="form-control" ng-disabled="config.dbType ==='sqlite' " ng-model="config.username" ng-disabled="config.expired && !config.activated"></input>
+                  <label>Mot de passe</label><input type="password" class="form-control" ng-disabled="config.dbType ==='sqlite' " ng-model="config.password" ng-disabled="config.expired && !config.activated"></input> 
+                  <label>base de données </label><input type="text" class="form-control" ng-disabled="config.dbType ==='sqlite' " ng-model="config.dbName" ng-disabled="config.expired && !config.activated"></input> 
                   
                   </form>
                 </p>
 
-                <button class="btn btn-primary" ng-disabled="config.expired && !config.activated" ng-cng-disabled="config.expired || config.activated" ng-click="conf.testDatabaseConnexion()">Tester la connexion </button>
+                <!--<button class="btn btn-primary" ng-disabled="config.expired && !config.activated" ng-cng-disabled="config.expired || config.activated" ng-click="conf.testDatabaseConnexion()">Tester la connexion </button>-->
 
-                <button class="btn btn-primary" ng-disabled="!saveEnabled" ng-click="conf.saveConfiguration()" >Sauvegarder la configuration</button>
-               <button class="btn btn-primary" ng-click="conf.backup()">Backup </button>
-                <button class="btn btn-primary" ng-click="conf.restore()">Restaurer ... </button>
-                <button class="btn btn-primary" ng-click="conf.nextStep('conf.step2')">Etape suivante</button>
+                <button class="btn btn-primary" ng-disabled="dbReady" ng-click="conf.saveConfiguration()" >Sauvegarder la configuration</button>
+                <button class="btn btn-primary" ng-disabled="!dbReady" ng-click="conf.deleteConfiguration()" >Supprimer la configuration</button>
+                
+                <button class="btn btn-primary" ng-disabled="config.dbType ==='sqlite' "  ng-click="conf.backup()">Backup </button>
+                <button class="btn btn-primary" ng-disabled="config.dbType ==='sqlite' "  ng-click="conf.restore()">Restaurer ... </button>
+                <button class="btn btn-primary" ng-disabled="!dbReady" ng-click="conf.nextStep('conf.step2')">Créer Société</button>
                  
 
               </div>
@@ -54,4 +52,16 @@
             </div>
             <!-- /.tab-content -->
 </div>  
+<h2>Aide</h2>
+Veuillez suivre ces étapes pour configurer l'application:
+<ol>
+  <li>Sélectionnez le type de base de données (Laissez <b>sqlite</b> si vous voulez utiliser un fichier pour la base de données)</li>
+  <li>Pour MySQL ou PostgreSQL entrez les informations de connexion à la base de données (Serveur:127.0.0.1 - Utilisateur:root - Mot de passe et nom de base de données)  </li>
+  <li>Clickez sur <b>-Sauvegarder la configuration-</b> et attendez l'affichage de message vert (<b>Base de données crée avec succés!</b>) seulement dans la premiére fois </li>
+  <li>Si vous voulez supprimer l'ancienne configuration et créer une nouvelle configuration clickez sur <b>-Supprimer la configuration-</b></li>
+  <li>Clickez sur <b>-Créer Société-</b> et entrez les informations de société (aprés le sauvegarde de la configuration)</li>
+  <li>Pour SQLite les buttons de backup et restauration sont désactivés</li>
+  <li>Pour SQlite vous pouvez trouver le fichier de base de donnée: <b>database.sqlite</b> (le sauvegarde) dans le dossier <b>/home</b></li>
+
+</ol>
 </div>
