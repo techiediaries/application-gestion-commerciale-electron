@@ -66,14 +66,22 @@ angular.module('gCom.controller').controller('ListSaleDeliveryController',functi
 	{
 		d = new Date(new Date().getFullYear(), 11, 31);
 		return d;
-	} 
+	}  
 		
 	ctrl.init = function(){
 			base.init();
 			$scope.client = {};
 			$scope.payee = undefined;
 			$scope.startPeriod = dateFilter(ctrl.getYearFirstDay());
-    		$scope.endPeriod = dateFilter(ctrl.getYearLastDay());
+			$scope.endPeriod = dateFilter(ctrl.getYearLastDay());
+			$scope.calculateTotal = function(){
+				var t = 0;
+				angular.forEach($scope.items,function(e,k){
+					t += e.somme;
+					
+				});
+				return t;
+			}			
 			$scope.$watch("client.id",function(){
 				console.log("client id changed");
 				if($scope.client.id)

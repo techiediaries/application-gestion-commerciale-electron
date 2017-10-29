@@ -16,6 +16,11 @@ module.exports = function(sequelize, DataTypes) {
       }
     }
   });
+  AL.afterDestroy(function (model, options, cb) {
 
+        var newQ = model.quantite; 
+        sequelize.models.Article.removeQuantity(model.ArticleId,newQ,0);
+        return cb(null, options);
+  });
   return AL;
 };

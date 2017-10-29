@@ -3,7 +3,9 @@
     <div class="col-md-12 no-print" style="padding: 10px;"> 
       
           <button class="btn" ng-click="ctrl.clear()"> Nouvelle..</button> 
-          <button class="btn" ng-click="ctrl.add()" ng-disabled="item.id || item.reference === undefined || item.reference === ''"> Enregistrer </button> 
+          <button class="btn" ng-click="ctrl.regler()" ng-disabled="item.items.length <= 0 || data.activerSauvegarde || !item.ClientId || !item.date || item.id || item.reference === undefined || item.reference === ''"> Régler BL(s) </button> 
+          <button class="btn" ng-click="ctrl.add()" ng-disabled="!data.activerSauvegarde || !item.ClientId || !item.date || item.id || item.reference === undefined || item.reference === ''"> Enregistrer (Affecte le journal) </button> 
+          
           <button class="btn" ng-click="ctrl.print()"> Imprimer</button> 
  
     </div>
@@ -32,6 +34,8 @@
           <th style="border-width: 0px;width: 20%;"><span><a ui-sref="smgmt.reglement.selectclient">Client </a></span></th>
           <td><span style="display: none;" contenteditable="true" ng-model="item.ClientId" ng-attr-contenteditable="true">{{item.ClientId}}</span>
           <span>{{client.reference}} || {{client.nom}}</span>
+          <span ng-show="item.ClientId" class="no-print" style="background: red;color:#fff;margin-left:10px;text-transform: uppercase;">SOLDE: {{client.solde}}</span>
+          
           </td>
         </tr>
         <tr>
@@ -40,6 +44,7 @@
           {{item.somme}}
           </span>
           <span style="margin-left:10px;text-transform: uppercase;"> {{Company.monnaie}}</span>
+
           </td>
         </tr>        
         <tr>
@@ -62,7 +67,12 @@
             </span>
           </td>
         </tr>
-          
+        <tr class="no-print">
+          <th style="border-width: 0px;width: 20%;"><span>Activer le sauvegarde</span></th>
+          <td>
+            <input ng-model="data.activerSauvegarde" type="checkbox" />
+          </td>
+        </tr>         
       </table>
       <table class="inventory">
           <!--<thead>
@@ -74,6 +84,7 @@
             <th><span >Somme</span></th>
           </tr>
           </thead>-->
+          <p ng-show="item.items.length > 0" class="no-print">Double Clickez sur un bon pour le supprimer de la liste</p>
           <tbody ng-repeat="it in item.items track by $index" ng-dblclick="removeItem(it)">
           <tr>
             <td colspan="1">{{it.reference }} | {{it.date | date :  "dd/MM/y"  }}</td>

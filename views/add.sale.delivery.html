@@ -1,4 +1,3 @@
-
 <span ui-view>
 <div class="row no-print" >
     <div class="col-md-12" style="padding: 10px;">
@@ -6,7 +5,7 @@
           <button class="btn" ng-click="ctrl.clear()"> Nouveau</button> 
           <button class="btn" ng-click="ctrl.add()"  ng-hide="item.id" ng-disabled="item.id || item.reference === undefined || item.reference === '' || item.payee || client.reference === undefined || client.reference === '' || item.date === undefined || item.date === ''"> Enregistrer</button>
              
-          <button class="btn" ng-click="ctrl.update()"  ng-show="item.id" ng-disabled="item.reference === undefined || item.reference === '' || item.payee "> Mettre à Jour</button>
+          <button class="btn" ng-click="ctrl.update()"  ng-show="item.id" ng-disabled="item.reference === undefined || item.reference === ''  "> Mettre à Jour</button>
         
           <button class="btn" ng-click="ctrl.hideCompanyDetails()"> Cacher les info de société </button>
           <button class="btn" ng-click="ctrl.showCompanyDetails()"> Afficher les info de société </button>
@@ -36,145 +35,150 @@
                     -->
                 </address>
                 <span><img alt=""  ng-show="company.logo" id="logo" ng-src="{{ company.logo }}"><input style="width:20px;height:10px;" type="file" id="logoInput" accept="image/*" /></span>
-              </div>
-            </header>
-            <article>
-              <h1>Recipient</h1>
-              <address>
+</div>
+</header>
+<article>
+  <h1>Recipient</h1>
+  <address>
 
-                <p contenteditable="true" ng-model="client.nom" ng-attr-contenteditable="{{ editMode }}"></p>
-                <p contenteditable="true" ng-model="client.address" ng-attr-contenteditable="{{ editMode }}"></p>
-                <p contenteditable="true" ng-model="client.tel" ng-attr-contenteditable="{{ editMode }}"></p>
-                <p contenteditable="true" ng-model="client.email" ng-attr-contenteditable="{{ editMode }}"></p>
+    <p contenteditable="true" ng-model="client.nom" ng-attr-contenteditable="{{ editMode }}"></p>
+    <p contenteditable="true" ng-model="client.address" ng-attr-contenteditable="{{ editMode }}"></p>
+    <p contenteditable="true" ng-model="client.tel" ng-attr-contenteditable="{{ editMode }}"></p>
+    <p contenteditable="true" ng-model="client.email" ng-attr-contenteditable="{{ editMode }}"></p>
 
-              </address>
-              <table class="meta">
-                <!--<tr>
+  </address>
+  <table class="meta">
+    <!--<tr>
                   <th><span>Bon Numéro </span></th>
                   <td><span contenteditable="true" ng-model="item.numero" ng-attr-contenteditable="true"></span></td>
                 </tr>-->
 
-                <tr>
-                  <th><span>Référence </span></th>
-                  <td><span contenteditable="true" ng-model="item.reference" ng-attr-contenteditable="{{ editMode}}"></span></td>
-                </tr>
+    <tr>
+      <th><span>Référence </span></th>
+      <td><span contenteditable="true" ng-model="item.reference" ng-attr-contenteditable="{{ editMode}}"></span></td>
+    </tr>
 
-                <tr>
-                  <th><span >Date</span></th>
-                  <td><input type="date" ng-model="item.date"/></span></td>
-                </tr>
-                <tr>
-                  <th ui-sref="smgmt.delivery.selectClient" style="cursor: pointer;"><span > Client</span></th>
-                  <td><span contenteditable="true" ng-model="client.reference" ng-attr-contenteditable="true">{{client.reference }}</span></td>
-                </tr>
+    <tr>
+      <th><span>Date</span></th>
+      <td><input type="date" ng-model="item.date" /></span>
+      </td>
+    </tr>
+    <tr>
+      <th ui-sref="smgmt.delivery.selectClient" style="cursor: pointer;"><span> Client</span></th>
+      <td><span contenteditable="true" ng-model="client.reference" ng-attr-contenteditable="true">{{client.reference }}</span></td>
+    </tr>
 
-                <tr class="no-print" ng-hide="item.id">
-                  <th   ui-sref="smgmt.delivery.selectOrder" style="cursor: pointer;"><span > Commande </span>
-                  </th>
-                  <td><span contenteditable="true" ng-model="item.CommandeVenteId" ng-attr-contenteditable="true">{{item.CommandeVenteId }}</span></td>
-                </tr>
+    <tr class="no-print" ng-hide="item.id">
+      <th ui-sref="smgmt.delivery.selectOrder" style="cursor: pointer;"><span> Commande </span>
+      </th>
+      <td><span contenteditable="true" ng-model="item.CommandeVenteId" ng-attr-contenteditable="true">{{item.CommandeVenteId }}</span></td>
+    </tr>
 
-                <tr class="no-print">
-                  <th><span > Paiement par</span></th>
-                  <td>
-                    <select ng-model="item.paiement" class="form-control">
+    <tr class="no-print">
+      <th><span> Paiement par</span></th>
+      <td>
+        <select ng-model="item.paiement" class="form-control">
                       <option value="espéces">Espéces</option>
                       <option  value="chéque">Chéque</option>
                       
                     </select>
-                  </td>
-                </tr>
-                <tr class="no-print" ng-show="item.paiement == 'chéque' ">
-                  <th style="border-width: 0px;width: 20%;"><span>Numéro de chéque</span></th>
-                  <td>
-                    <span contenteditable="true" ng-model="item.chequeno" ng-attr-contenteditable="true">
+      </td>
+    </tr>
+    <tr class="no-print" ng-show="item.paiement == 'chéque' ">
+      <th style="border-width: 0px;width: 20%;"><span>Numéro de chéque</span></th>
+      <td>
+        <span contenteditable="true" ng-model="item.chequeno" ng-attr-contenteditable="true">
                       {{ item.chequeno }}
                     </span>
-                  </td>
-                </tr>
-              </table>
-              <table class="inventory">
-                <thead>
-                  <tr>
-                    <th class="no-print"><span>Suppr</span></th>
-                    <th><span >Article</span></th>
-                    <th><span >Désignation</span></th>
-                    <th><span >Unité de mesure</span></th>
-                    
-                    
-                    <th><span >Quantité</span></th>
-                    <th class="no-print"><span >Prix HT</span></th>
-                    <th><span >Prix TTC</span></th>
-                    
-                    <th><span >Total </span></th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr ng-repeat="it in item.items">
-                    <td class="no-print"><button style="margin: 0px;padding: 0px; width: 15px;" class="no-print" ng-click="removeItem(it)"><i class="fa fa-minus-circle"></i></button></td>
-                    <td><span contenteditable="true" ng-model="it.reference">{{it.reference}}</span></td>
-                    <td style="text-align: left;"><span contenteditable="true" ng-model="it.designation" ng-attr-contenteditable="{{editMode}}">{{it.designation}}</span></td>
-                    <td style="text-align: left;"><span contenteditable="false" ng-model="it.unite" ng-attr-contenteditable="false">{{it.unite}}</span></td>
-                    
-<td><span contenteditable="true" g-attr-contenteditable="{{editMode}}" style="float:left;" ng-model="it.quantite">{{it.quantite}} </span><span style="width: 30%; float: right;" class="no-print label label-danger">{{it.qReel - it.quantite}}</span></td>
-                    
-                    <td style="text-align: left;" class="no-print">
-                    <span>{{ (it.prixUnitaire / ( 1 + it.taxe )) | number : 2 }}</span>
-                    
+      </td>
+    </tr>
+  </table>
+  <table class="inventory">
+    <thead>
+      <tr>
+        <th class="no-print"><span>Suppr</span></th>
+        <th><span>Article</span></th>
+        <th><span>Désignation</span></th>
+        <th><span>Unité de mesure</span></th>
 
-                    </td>
-                    <td style="text-align: left;" >
-                      
-                    <span contenteditable="true" g-attr-contenteditable="{{editMode}}" ng-model="it.prixUnitaire">{{it.prixUnitaire}}</span>
-                    <span style="width: 30%;float: right;" class="label label-danger no-print">{{it.prixAchat}}</span>
 
-                    </td>
+        <th><span>Quantité</span></th>
+        <th class="no-print"><span>Prix HT</span></th>
+        <th><span>Prix TTC</span></th>
 
-                    <td style="text-align: left;"><span>{{ it.prixUnitaire * it.quantite }}</span></td>
-                  </tr>
-                </tbody>
-              </table>
-              <a ng-hide ="item.CommandeVenteId" class="btn btn-primary no-print" ui-sref="smgmt.delivery.selectArticle">+</a>
+        <th><span>Total </span></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="it in item.items">
+        <td class="no-print"><button style="margin: 0px;padding: 0px; width: 15px;" class="no-print" ng-click="removeItem(it)"><i class="fa fa-minus-circle"></i></button></td>
+        <td><span contenteditable="true" ng-model="it.reference">{{it.reference}}</span></td>
+        <td style="text-align: left;"><span contenteditable="true" ng-model="it.designation" ng-attr-contenteditable="{{editMode}}">{{it.designation}}</span></td>
+        <td style="text-align: left;"><span contenteditable="false" ng-model="it.unite" ng-attr-contenteditable="false">{{it.unite}}</span></td>
 
-         <table class="balance">
-                <tr>
-                  <th><span >Somme HT</span></th>
-                  <td><span>{{ calculateSubTotal() }}</span> <span data-prefix>{{item.monnaie}}</span></td>
-                </tr>
-                <tr>
-                  <th><span >TVA à {{ item.taxe * 100 }}%</span> </th>
-                  <td>
-                    <span  >{{ (item.tva = item.somme   - item.sommeHT )| number : 2 }} </span><span data-prefix>{{ item.monnaie }}</span>
-                  </td>
-                </tr>
-                <tr>
-                  <th><span >Somme TTC</span></th>
-                  <td><span>{{ calculateTotal() }} <span data-prefix>{{ item.monnaie }}</span></span></td>
-                </tr>
-              </table>
-            </article>
-            
-              <div >
+        <td><span contenteditable="true" g-attr-contenteditable="{{editMode}}" style="float:left;" ng-model="it.quantite">{{it.quantite}} </span>
+          <span
+            style="width: 30%; float: right;" class="no-print label label-danger">{{it.qReel - it.quantite}}</span>
+        </td>
+
+        <td style="text-align: left;" class="no-print">
+          <span>{{ (it.prixUnitaire / ( 1 + it.taxe )) | number : 2 }}</span>
+
+
+        </td>
+        <td style="text-align: left;">
+
+          <span contenteditable="true" g-attr-contenteditable="{{editMode}}" ng-model="it.prixUnitaire">{{it.prixUnitaire}}</span>
+          <span style="width: 30%;float: right;" class="label label-danger no-print">{{it.prixAchat}}</span>
+
+        </td>
+
+        <td style="text-align: left;"><span>{{ it.prixUnitaire * it.quantite }}</span></td>
+      </tr>
+    </tbody>
+  </table>
+  <a ng-hide="item.CommandeVenteId" class="btn btn-primary no-print" ui-sref="smgmt.delivery.selectArticle">+</a>
+
+  <table class="balance">
+    <tr>
+      <th><span>Somme HT</span></th>
+      <td><span>{{ calculateSubTotal() }}</span> <span data-prefix>{{item.monnaie}}</span></td>
+    </tr>
+    <tr>
+      <th><span>TVA à {{ item.taxe * 100 }}%</span> </th>
+      <td>
+        <span>{{ (item.tva = item.somme   - item.sommeHT )| number : 2 }} </span><span data-prefix>{{ item.monnaie }}</span>
+      </td>
+    </tr>
+    <tr>
+      <th><span>Somme TTC</span></th>
+      <td><span>{{ calculateTotal() }} <span data-prefix>{{ item.monnaie }}</span></span>
+      </td>
+    </tr>
+  </table>
+</article>
+
+<!--<div >
                 <p>Arrété le présent bon à la somme de : </p>
                 <p contenteditable="true" g-attr-contenteditable="{{editMode}}" ng-model="item.price" style="text-transform: uppercase;">{{item.price}}</p>
-              </div>
-              <div >
-                <p>Mode de Paiement : {{item.paiement }} <span ng-show="item.paiement == 'chéque' "> N {{item.chequeno}} </span></p>
-              </div>
+              </div>-->
+<div>
+  <p>Mode de Paiement : {{item.paiement }} <span ng-show="item.paiement == 'chéque' "> N {{item.chequeno}} </span></p>
+</div>
 <div class="docfooter">
-            <div class="docfooter1" ng-show="company.footer">
-              <h1><span >Notes Additionnelles</span></h1>
-              <div class="footernotes" contenteditable="true" ng-model="item.notes" ng-attr-contenteditable="true">
-                <p>Nous restons à votre disposition pour toute information complémentaire.</p>
-                <p>Cordialement.</p>
-              </div>
-            </div>
-            <div  class="footercompany" ng-show="company.footer" style="margin: auto;text-align: center;">
-              
-              <div contenteditable="true" ng-model="company.footer" ng-attr-contenteditable="true">
-              {{company.footer}}  
-              </div>
-            </div>            
+  <div class="docfooter1" ng-show="company.footer">
+    <h1><span>Notes Additionnelles</span></h1>
+    <div class="footernotes" contenteditable="true" ng-model="item.notes" ng-attr-contenteditable="true">
+      <p>Nous restons à votre disposition pour toute information complémentaire.</p>
+      <p>Cordialement.</p>
+    </div>
+  </div>
+  <div class="footercompany" ng-show="company.footer" style="margin: auto;text-align: center;">
+
+    <div contenteditable="true" ng-model="company.footer" ng-attr-contenteditable="true">
+      {{company.footer}}
+    </div>
+  </div>
 </div>
 </div>
 </div>

@@ -17,7 +17,7 @@ module.exports = function(sequelize, DataTypes) {
       associate: function(models) {
 
        		LJ.belongsTo(models.Exercice);
-          LJ.hasOne(models.Reglement);
+          //LJ.hasOne(models.Reglement);
               
       
       }

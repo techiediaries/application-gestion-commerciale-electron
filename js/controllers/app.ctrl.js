@@ -1,4 +1,4 @@
-angular.module('gCom.controller').controller('AppCtrl',function($scope,$timeout,DBService,ArticleService){
+angular.module('gCom.controller').controller('AppCtrl',function($scope,$rootScope,$timeout,DBService,ArticleService,Flash){
   var ctrl = this;
   var config = JSON.parse(window.localStorage.getItem('config'));
   var date = new Date();
@@ -28,6 +28,12 @@ angular.module('gCom.controller').controller('AppCtrl',function($scope,$timeout,
   DBService.getCount('Fournisseur').then(function(c){
 
       $scope.countOfProviders = c;
+  },function(err){
+    console.log(JSON.stringify(err));
+    var message = "Erreur de base de données, vérifiez si vous avez déja crée une base de données.\n Si vous avez déja sauvegardé une configuration essayez de la supprimer et sauvegarder une nouvelle configuration. "; 
+    var id = Flash.create('error', message, 0, {class: 'custom-class', id: 'custom-id'}, true);
+    $rootScope.User = {isAdmin : true};   
+
   });
   DBService.getCount('Client').then(function(c){
 

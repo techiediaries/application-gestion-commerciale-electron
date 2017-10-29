@@ -840,7 +840,7 @@ angular.module('gCom.services', [])
       removeAll:function(model,ids){
        
         if(ids)
-          return models.db[model].destroy({where:{id:{$in:ids}}});
+          return models.db[model].destroy({where:{id:{$in:ids}},individualHooks: true});
         else
           return;
 
@@ -866,7 +866,7 @@ angular.module('gCom.services', [])
  
       update:function(model,obj,id){
           var deferred = $q.defer();
-          models.db[model].update(obj,{where:{id:id}}).then(function(o){
+          models.db[model].update(obj,{where:{id:id},individualHooks: true}).then(function(o){
                 deferred.resolve(o);
 
           });

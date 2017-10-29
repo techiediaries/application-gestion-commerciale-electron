@@ -4,6 +4,9 @@ var fs        = require("fs");
 var path      = require("path");
 var Sequelize = require("sequelize");
 var env       = process.env.NODE_ENV || "development";
+var user_profile = process.env.HOME || process.env.HOMEPATH || process.env.USERPROFILE;
+var sqlite_db = user_profile + '/database.sqlite';
+console.log("sqlite db existe dans" + sqlite_db);
 //var config    = require(path.join(__dirname, '..', 'config', 'config.json'))[env];
 //var config = require(path.join(__dirname,'/../config.json'));
 var config = JSON.parse(window.localStorage.getItem('config')) || {};
@@ -39,7 +42,7 @@ function setup(){
       min: 0,
       idle: 10000
     },logging: console.log.bind(console),
-    storage: './../database.sqlite'
+    storage: sqlite_db
   });
  /* config.dbName = 'database';
   config.username = 'root';

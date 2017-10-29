@@ -22,11 +22,46 @@ module.exports = function(sequelize, DataTypes) {
         PO.belongsTo(models.Fournisseur);
         PO.belongsTo(models.CommandeAchat);
         PO.hasMany(models.LigneLivraisonAchat);
+        PO.belongsTo(models.LigneJournalAchat);
+        PO.belongsTo(models.LigneJournalFournisseur);        
       }
     }
   });
 //
+PO.afterUpdate(function(model, options, cb) {
+  var debit = model.somme;
+  var credit = 0;
+  var previousTotal = 0;
+  var date = model.date;
+  var total  = previousTotal + (debit - credit);
+  var libelle = "<a style='color:white;' ui-sref=\"pmgmt.delivery({id:'"+ model.id+"'})\">" + "Bon Achat avec référence " + model.reference +"</a>";
   
+  /*sequelize.models.LigneJournal.count({}).then(function(c){
+
+    if(c === 0)
+    {
+      previousTotal = 0;
+    }
+    else
+    {
+      previousTotal = 0:
+    }
+  });*/
+
+  sequelize.models.LigneJournalAchat.create({debit:debit,date : date,credit:credit,libelle:libelle},{where:{id:LigneJournalAchatId}}).then(function(e){
+    console.log('creating entree journal ' + e);
+  });
+
+  if(model.FournisseurId)
+  {
+      sequelize.models.LigneJournalFournisseur.create({FournisseurId:model.FournisseurId,debit:debit,credit:credit,libelle:libelle,date:date},{where:{id:LigneJournalFournisseurId}}).then(function(e){
+        console.log('creating entree journal ' + e);
+      });      
+  }
+
+  return cb(null,options);
+
+});  
   PO.afterCreate(function(model, options, cb) {
     var debit = model.somme;
     var credit = 0;

@@ -5,7 +5,7 @@ angular.module('gCom.controller').controller('ListCustomerController',function (
 
   	 	return 'Client';
   	} 
-
+ 
   	base.hookSelectionHandler = function(){
   		//console.log('hooking selection handler' + angular.toJson($scope.selections) );
   		if($scope.$parent.item)
@@ -61,6 +61,32 @@ angular.module('gCom.controller').controller('ListCustomerController',function (
 	this.init = function(){
 		base.init();
 		$scope.state = {};
+		$scope.calculatePositiveTotal = function(){
+			var t = 0;
+			angular.forEach($scope.items,function(e,k){
+				if(e.solde >= 0)
+				{	t += e.solde;
+				} 
+			});
+			return t;
+		}
+		$scope.calculateNegativeTotal = function(){
+			var t = 0;
+			angular.forEach($scope.items,function(e,k){
+				if(e.solde <= 0)
+				{	t += e.solde;
+				} 
+			});
+			return t;
+		}	
+		$scope.calculateTotal = function(){
+			var t = 0;
+			angular.forEach($scope.items,function(e,k){
+				t += e.solde;
+				
+			});
+			return t;
+		}						
 		$scope.$watch("state.reference",function(){
 			getInitialPage2();
 		});

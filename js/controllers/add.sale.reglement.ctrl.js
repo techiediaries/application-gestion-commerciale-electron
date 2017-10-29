@@ -9,11 +9,33 @@ angular.module('gCom.controller').controller('AddSaleReglementController',functi
     	};}
    $scope.state = 'pmgmt.reglement';
    $scope.pay = false;
+   $scope.activerSauvegarde = false;
    base.setModel = function(){
       return 'Reglement';
    }
    
+    this.regler = function(){
 
+      if($scope.item.items && $scope.item.items.length > 0)
+      {
+        var ids = [];
+        angular.forEach($scope.item.items, function(v, key) {
+          ids.push(v.id);
+
+        });          
+        DBService.bupdate('LivraisonVente',{payee : true},ids).then(function(){
+          
+          //ctrl.hookAddSuccessCompletion();
+        var message = 'BLs réglés avec succés!';
+        var id = Flash.create('success', message, 0, {class: 'custom-class', id: 'custom-id'}, true);
+        });          
+      }
+      else
+      {
+        alert("If faut choisir un/des bon(s)","Erreur");
+        return;
+      }
+    }
     this.add = function(){
         $scope.item.type ="vente";
         DBService.getCounter('Reglement','RE').then(function(o){
@@ -47,9 +69,24 @@ angular.module('gCom.controller').controller('AddSaleReglementController',functi
                           });
                       }else
                       {
-                                  var message = 'Réglement crée avec succés !';
-                                  var id = Flash.create('success', message, 0, {class: 'custom-class', id: 'custom-id'}, true);
-                                                              
+                        var message = 'Réglement crée avec succés!';
+                        var id = Flash.create('success', message, 0, {class: 'custom-class', id: 'custom-id'}, true);
+                      
+                        if($scope.item.paiement === 'espéces' || $scope.item.paiement === 'chéques' ){}
+                        /*DBService.update("Client",{solde:(parseFloat($scope.client.solde)||0) + parseFloat($scope.item.somme) },$scope.item.ClientId).then(function(c){
+                          var message = 'Réglement crée avec succés et solde client mis à jour!';
+                          var id = Flash.create('success', message, 0, {class: 'custom-class', id: 'custom-id'}, true);
+  
+                        },function(err){
+
+                        });*/
+                        else
+                        {
+                          var message = 'Réglement crée avec succés!';
+                          var id = Flash.create('success', message, 0, {class: 'custom-class', id: 'custom-id'}, true);
+                          
+                        }
+                                                    
                       }
 
                 }
@@ -114,6 +151,11 @@ angular.module('gCom.controller').controller('AddSaleReglementController',functi
      $scope.data = {};
      $scope.data.somme = 0;
      $scope.data.sommeht = 0; 
+     $scope.data.activerSauvegarde = false;
+     /*$scope.$watch("data.activerSauvegarde",function(){
+       console.log("changed: " + $scope.data.activerSauvegarde);
+
+     });*/
      $scope.$watch("item.items.length",function(){
        console.log("change");
       $scope.data.somme = 0;
@@ -123,9 +165,20 @@ angular.module('gCom.controller').controller('AddSaleReglementController',functi
         $scope.data.somme += $scope.item.items[i].somme;
         $scope.data.sommeht += $scope.item.items[i].sommeHT;
       }
+      $scope.item.somme = $scope.data.somme;
      });
      $scope.item = this.setDefaults();
    }
-
+   $scope.$watch("item.somme",function(){
+     console.log("somme: "+ $scope.item.somme);
+     if($scope.client.solde > 0 && $scope.item.somme > $scope.client.solde){
+        alert("Attention vous'avez dépassé le solde client.","Message");
+     }
+   });
+   /*$scope.$watch("item.items",function(){
+     $scope.item.somme = 0 ;
+     $scope.data.sommeht = 0; 
+      cSomme();
+   });*/
    ctrl.init();
 });

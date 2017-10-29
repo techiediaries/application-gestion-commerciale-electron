@@ -14,6 +14,8 @@ angular.module('gCom.controller').controller('SettingsCtrl',function($scope,$roo
   $scope.company.ice = "001437356000021";
   $scope.bank = {};
   $scope.journal = {};
+  var user_profile = process.env.HOME || process.env.HOMEPATH || process.env.USERPROFILE;
+  $scope.sqlite_db = user_profile + '/database.sqlite';
   $scope.formatFooter = function(){
     $scope.company.footer  = "Sté " + $scope.company.raisonSociale + ", " + $scope.company.addresse + "<br>" + 
   "R.C : " + $scope.company.rc + "-Patente" + $scope.company.patente + "-CNSS" + " : " + $scope.company.cnss + "I.F : "+
@@ -151,6 +153,9 @@ angular.module('gCom.controller').controller('SettingsCtrl',function($scope,$roo
     $scope.config.dbType = "sqlite";
   }
   conf.saveConfiguration = function(){
+    var message = 'Veuillez attendre la création de la base de données ...';
+    var id = Flash.create('success', message, 0, {class: 'custom-class', id: 'custom-id'}, true);
+       
       var models = require('./models');
       console.log('saving conf ' + JSON.stringify($scope.config));
       if($scope.config)
@@ -172,14 +177,41 @@ angular.module('gCom.controller').controller('SettingsCtrl',function($scope,$roo
             console.log('configuration saved');
 
           DBService.create('User',{username : "admin" , password : "admin" , isAdmin : true}).then(function(user){
-            var message = 'Base de données crée avec succés !';
+            var message = 'Base de données et utilisateur admin crées avec succés!';
             var id = Flash.create('success', message, 0, {class: 'custom-class', id: 'custom-id'}, true);
             $scope.$apply(); 
             console.log("user is created : " + angular.toJson(user));
             $rootScope.User = user;
 
-          });
+          },function(err){
+            var message = 'Base de données déja existe!';
+            var id = Flash.create('warning', message, 0, {class: 'custom-class', id: 'custom-id'}, true);
+            $scope.$apply(); 
+            
+            DBService.getById('User',1).then(function(user){
+              $rootScope.User = user;
+              console.log("utilisateur admin existe!!!");
+              var message = "Un utilisateur admin existe!";
+              var id = Flash.create('warning', message, 0, {class: 'custom-class', id: 'custom-id'}, true);
+              $scope.$apply(); 
+            },function(err){
+              console.log("erreur " + err);
+              $rootScope.User = null;
+              var message = "Erreur: Utilisateur Admin n'existe pas! ";
+              var id = Flash.create('error', message, 0, {class: 'custom-class', id: 'custom-id'}, true);
+                    
+            });
+                        
+          })
         
+        },function(err){
+          console.log("error connecting to database" + err);
+          /*if(err.original.code ==='SQLITE_CANTOPEN'){
+            console.log("SQLITE_CANTOPEN");
+          }*/
+          var message = 'Erreur de base de données!';
+          var id = Flash.create('error', message, 0, {class: 'custom-class', id: 'custom-id'}, true);
+          $scope.$apply();          
         });
       }    
       

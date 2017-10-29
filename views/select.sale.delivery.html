@@ -17,12 +17,21 @@
           <option value="1000000">Tous</option>   
        </select>       
     </div>
-    <div class="col-md-3">
+   <!-- <div class="col-md-3">
       <a class="btn btn-primary" ui-sref="smgmt.reglement.selectso.selectClient" style="padding-left:1px;margin-left:2px;text-transform: uppercase;width: 100%;"> Sélectionner le client</a>
     </div>
     <div class="col-md-3">
       <input style="width: 100%"  ng-model="client.reference" class="form-control" /> 
-    </div>        
+    </div>      -->
+    <div class="col-md-3">
+      <select class="form-control" ng-model="payee">
+          <option value="payee">Réglés</option>
+          <option value="nonpayee">Non réglés</option>
+          <option value="tous">Tous</option>
+          
+       </select>  
+
+    </div>     
 </div>  
 <div class="row">
          <div class="col-xs-12">
@@ -34,7 +43,7 @@
                     <th>Client</th>
                     <th>Date</th>
                     <th>Taxe</th>
-                    
+                    <th>Réglé?</th>
                     
                     <th>Somme</th>
                   </tr>
@@ -43,6 +52,7 @@
                     <td>{{e.Client.reference}}|{{e.Client.nom}}</td>
                     <td>{{e.date | date}}</td>
                     <td>{{e.taxe}}</td>
+                    <td><span ng-show="e.payee">OUI</span> <span ng-show="!e.payee">NON</span></td>
                     <td>{{e.somme}}</td>
                   </tr>
                 </tbody></table>

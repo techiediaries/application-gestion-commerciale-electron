@@ -26,6 +26,13 @@ module.exports = function(sequelize, DataTypes) {
 
         PO.hasMany(models.LivraisonVente);
         //PO.hasMany(models.LigneCommande);
+        PO.hasOne(models.LigneJournalVente);
+        PO.hasOne(models.LigneJournalClient);
+        PO.hasOne(models.LigneJournalAchat);
+        PO.hasOne(models.LigneJournalFournisseur);
+        //PO.hasOne(models.Caisse);
+        
+        
       }
     }
   });

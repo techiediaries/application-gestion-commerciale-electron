@@ -11,7 +11,7 @@ angular.module('gCom.controller').controller('SelectSaleDeliveryController',func
   	}
     base.getInitialPage = function getInitialPage(){
 		DBService.reset();
-		DBService.getSalesDeliveryPager(parseInt($scope.pageSize),{ClientId:$scope.$parent.item.ClientId,payee : "nonpayee"}).then(function(o){
+		DBService.getSalesDeliveryPager(parseInt($scope.pageSize),{ClientId:$scope.$parent.item.ClientId,payee : $scope.payee}).then(function(o){
 			base.pager = o;
 			base.pager.initialPage().then(function(r){
 					$scope.items = [];
@@ -48,7 +48,7 @@ angular.module('gCom.controller').controller('SelectSaleDeliveryController',func
 	}
 	function getInitialPage2(){
 			DBService.reset();
-			DBService.getSalesDeliveryPager(parseInt($scope.pageSize),{ClientId : $scope.client.id,payee : "nonpayee"}).then(function(o){
+			DBService.getSalesDeliveryPager(parseInt($scope.pageSize),{ClientId : $scope.$parent.item.ClientId,payee : $scope.payee}).then(function(o){
 				ctrl.pager = o;
 				ctrl.pager.initialPage().then(function(r){
 						$scope.items = [];
@@ -67,6 +67,7 @@ angular.module('gCom.controller').controller('SelectSaleDeliveryController',func
 
 		base.init();
 		$scope.client = {};
+		$scope.payee = "nonpayee";
 		/*$scope.$watch("search",function(){
 			
 			if($scope.search !== null && $scope.search !== undefined)
@@ -81,7 +82,11 @@ angular.module('gCom.controller').controller('SelectSaleDeliveryController',func
 				{
 					getInitialPage2();
 				}
-			});		
+			});	
+			$scope.$watch("payee",function(p){
+				console.log("payee ? " + p);
+				getInitialPage2();
+			});				
 	}
 
   	this.init(); 	 	 

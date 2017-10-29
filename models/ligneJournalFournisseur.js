@@ -13,7 +13,7 @@ module.exports = function(sequelize, DataTypes) {
 
        		LJ.belongsTo(models.Exercice);
           LJ.belongsTo(models.Fournisseur);
-          LJ.hasOne(models.Reglement);
+          //LJ.hasOne(models.Reglement);
               
       
       }

