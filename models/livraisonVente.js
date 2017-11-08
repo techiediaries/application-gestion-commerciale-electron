@@ -93,15 +93,21 @@ module.exports = function (sequelize, DataTypes) {
 
   });
 
-  PO.afterDestroy(function (model, options, cb) {
+  PO.beforeDestroy(function (model, options, cb) {
 
-    console.log("afteeeeeeeeeeer destory");
+    console.log("afteeeeeeeeeeer destory: " + model.id);
+    var promises = [];
     sequelize.models.LigneVente.findAll({where:{LivraisonVenteId:model.id}}).then(function(lignes){
       console.log("lignes : " + lignes);
       for(var i = 0 ; i < lignes.length ; i++)
       {
-        sequelize.models.LigneVente.destroy({where: {id : lignes[i].id},individualHooks: true});
+        promises.push(sequelize.models.LigneVente.destroy({where: {id : lignes[i].id},individualHooks: true}));
+      
       }
+      Promise.all(promises).then(function(instances){
+        console.log("all deleted");
+      });
+          
     });
 
     return cb(null, options);

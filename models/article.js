@@ -43,12 +43,13 @@ module.exports = function(sequelize, DataTypes) {
       addQuantity:function(id,q){
           Article.findById(id).then(function(a){
             var obj = {
-              qReel : a.qReel + parseInt(q),
-              qTheorique : a.qTheorique + parseInt(q),
+              qReel : a.qReel + parseFloat(q),
+              qTheorique : a.qTheorique + parseFloat(q),
                
             }
             return Article.update(obj,{where:{id:id}});
-          })
+          });
+
       },
       removeQuantity:function(id,q,p){
 

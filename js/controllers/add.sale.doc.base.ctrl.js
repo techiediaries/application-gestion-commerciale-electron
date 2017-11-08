@@ -539,6 +539,7 @@ angular.module('gCom.controller').controller('AddSaleDocumentController',functio
       var nI = {};
       console.log("model " + this.setModel());
       console.log("updating " + angular.toJson($scope.item));
+      console.log("old items" + JSON.stringify($scope.oldItems));
       for(var prop in $scope.item)
       {
         if(prop !== "id" || prop !== "createdAt" || prop !== "updatedAt")
@@ -576,11 +577,32 @@ angular.module('gCom.controller').controller('AddSaleDocumentController',functio
               angular.forEach($scope.item.items, function(v, key) {
                 //v.id = null;
                 v[fModel] = $scope.item.id; 
+                /*var oldItem = null;
+                angular.forEach($scope.oldItems,function(ol,olk){
+                    if(ol.id === v.id){
+                      oldItem = ol; 
+                      
+                    }
+                });
+                if(oldItem !== null && ( v.quantite < oldItem.quantite )){
+                   //v.quantite += (oldItem.quantite - v.quantite);
+                }*/
                 lignes.push(v);
+
 
               }); 
               DBService.bcreate('LigneVente',lignes).then(function(dd){
-                  ctrl.hookAddSuccessCompletion();                
+                  //ctrl.hookAddSuccessCompletion();   
+                  var promises =  [];
+                  angular.forEach(lignes, function(v, key) {
+                    promises.push(ArticleService.decrementArticleQuantity(v.ArticleId,v.quantite));
+                 });
+                 Promise.all(promises).then(function(){
+                   var message = 'Bon de livraison et stock mis à jour avec succés!';
+                   var id = Flash.create('success', message, 0, {class: 'custom-class', id: 'custom-id'}, true);
+                   $scope.$apply();
+
+                 });                               
               });          
 
         });
@@ -592,6 +614,7 @@ angular.module('gCom.controller').controller('AddSaleDocumentController',functio
     this.clear();
     //ctrl.getCompanyInfo();
     $scope.editMode = true;
+    
     $scope.$watch("item.somme",function(){
       console.log("changing somme");
       $scope.item.price = ctrl.convertPriceInWords($scope.item.net);

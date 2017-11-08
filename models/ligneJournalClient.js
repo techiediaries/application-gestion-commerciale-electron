@@ -120,7 +120,7 @@ module.exports = function (sequelize, DataTypes) {
         attributes: [[sequelize.fn('MAX', sequelize.col('id')), 'greatestId']]
       }).then(function (t) {
         //console.log(t);
-
+ 
         var greatestId = t[0].dataValues.greatestId;
         console.log("greatest id " + greatestId);
         sequelize.models.LigneJournalClient.findById(greatestId).then(function (lj) {

@@ -16,10 +16,12 @@ module.exports = function(sequelize, DataTypes) {
       }
     }
   });
-  AL.afterDestroy(function (model, options, cb) {
+  AL.beforeDestroy(function (model, options, cb) {
 
         var newQ = model.quantite; 
-        sequelize.models.Article.removeQuantity(model.ArticleId,newQ,0);
+        console.log("removing lignevente " + model.id);
+        console.log("adding back quantity: " + model.quantite + " for Article"+ model.ArticleId);
+        sequelize.models.Article.addQuantity(model.ArticleId,newQ);
         return cb(null, options);
   });
   return AL;
