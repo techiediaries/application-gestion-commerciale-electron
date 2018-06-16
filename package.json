@@ -8,6 +8,7 @@
   "private": true,
   "scripts": {
     "start": "electron .",
+    "rebuild": "electron-rebuild -f -w sqlite3",
     "package": "electron-packager ./  --all --out ~/Desktop"
   },
   "dependencies": {
@@ -17,16 +18,16 @@
     "macaddress": "^0.2.8",
     "mysql": "^2.10.2",
     "mysql-tools": "^0.1.2",
-    "sequelize": "^3.20.0",
+    "sequelize": "^3.33.0",
     "sqlite": "^2.2.0",
-    "sqlite3": "^3.1.4",
+    "sqlite3": "^3.1.13",
     "written-number": "^0.5.0"
   },
   "devDependencies": {
     "electron-packager": "^7.0.2",
     "electron-packager-interactive": "0.0.5",
-    "electron-rebuild": "^1.1.5",
     "electron-prebuilt": "^1.2.0",
+    "electron-rebuild": "^1.7.3",
     "electron-winstaller": "^2.2.0"
   }
 }
