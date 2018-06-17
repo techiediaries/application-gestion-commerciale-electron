@@ -85,7 +85,8 @@ module.exports = function (sequelize, DataTypes) {
         
                 });
               });
-        
+              //sequelize.models.Client.update({ solde: balance }, { where: { id: model.ClientId } });
+
             }
             else {
               var balance = model.credit - model.debit;

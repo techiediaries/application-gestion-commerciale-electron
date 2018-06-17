@@ -30,6 +30,7 @@ angular.module('gCom.controller').controller('AddSaleDocumentController',functio
           result += it.prixUnitaire  * it.quantite;
       })
       $scope.item.somme = result;
+
       return $filter('number')(result, 2);
      
   }
@@ -404,6 +405,7 @@ angular.module('gCom.controller').controller('AddSaleDocumentController',functio
               $scope.item.notes ='';
               $scope.item.monnaie = $scope.company.monnaie;
               $scope.item.items = []; 
+              $scope.item.oldSomme = 0;
 
         }      
               //$scope.$apply();
@@ -418,6 +420,7 @@ angular.module('gCom.controller').controller('AddSaleDocumentController',functio
       var ctrl = this;
       console.log("getting details ");
       $scope.oldItems = [];
+      $scope.item.oldSomme = 0;
      if($stateParams.id)
      {
         console.log('id ' + $stateParams.id);
@@ -439,6 +442,10 @@ angular.module('gCom.controller').controller('AddSaleDocumentController',functio
               $scope.item.taxe = c.taxe;
               $scope.item.notes = c.notes;
               $scope.item.sommeHT =c.sommeHT;
+              //changed lately
+              $scope.item.somme =c.somme;
+              $scope.item.oldSomme = c.somme;
+              console.log("sommmmmmmmmmmmmmmmmmmme" + c.somme);
               $scope.item.date = c.date;
               $scope.item.signature = c.signature;
               $scope.item.acceptee = c.acceptee; 

@@ -2,7 +2,7 @@
     <div class="col-md-12 no-print" style="padding-top: 1px;padding-bottom: 5px;text-decoration: uppercase;"> 
       
           <button class="btn" ng-click="ctrl.clear()"> Nouvelle..</button> 
-          <button class="btn" ng-click="ctrl.add()" ng-show="!item.id" ng-disabled="item.reference === undefined || item.reference === ''"> Enregistrer </button> 
+          <button class="btn" ng-click="ctrl.add()" ng-show="!item.id" ng-disabled="item.reference === undefined || item.reference === '' || !fournisseur.reference"> Enregistrer </button> 
           <button class="btn" ng-click="ctrl.update()" ng-show="item.id" ng-disabled="item.reference === undefined || item.reference === '' || item.facturee === true || item.livree === true"> Modifier 
 
 

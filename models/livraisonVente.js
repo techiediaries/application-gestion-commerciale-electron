@@ -32,6 +32,16 @@ module.exports = function (sequelize, DataTypes) {
       }
     });
   //
+  /*PO.beforeUpdate(function(model, options, cb) {
+    console.log(model.Client)
+    sequelize.models.Client.findById(model.ClientId).then((cl)=>{
+      console.log("client ---- ", cl);
+      let newSolde = cl.solde - model.somme;
+      sequelize.models.Client.update({ solde: newSolde }, { where: { id: model.ClientId } });
+
+    })
+  });*/
+  
   PO.afterUpdate(function (model, options, cb) {
     console.log("after update");
     var debit = model.somme;
@@ -49,7 +59,12 @@ module.exports = function (sequelize, DataTypes) {
     if (model.ClientId) {
       sequelize.models.LigneJournalClient.update({ ClientId: model.ClientId, debit: debit, credit: credit, libelle: libelle, date: date }, { where: { id: model.LigneJournalClientId }, individualHooks: true }).then(function (e) {
         console.log('updated entree journal ' + e);
-        
+        /*sequelize.models.Client.findById(model.ClientId).then((cl)=>{
+          console.log("client ---- ", cl);
+          let newSolde = cl.solde + model.somme;
+          sequelize.models.Client.update({ solde: newSolde }, { where: { id: model.ClientId } });
+    
+        })*/        
       });
     }
 

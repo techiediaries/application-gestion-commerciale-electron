@@ -97,6 +97,7 @@ module.exports = function(sequelize, DataTypes) {
 
     return cb(null, options);
   });   
+
    LJ.afterCreate(function(model, options, cb) {
 
     console.log('after create ' + model.id);

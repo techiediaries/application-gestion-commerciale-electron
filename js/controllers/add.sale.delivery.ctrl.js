@@ -36,10 +36,13 @@ angular.module('gCom.controller').controller('AddSaleDeliveryController', functi
       }
     }
     var fModel = "LivraisonVenteId";
-
+    let newSomme = nI.somme;
+    let oldSomme = $scope.item.oldSomme;
+    console.log("old sommmmmmmmmme", oldSomme);
 
     DBService.update(this.setModel(), nI, $scope.item.id).then(function (d) {
       //console.log('updateed ' + this.setModel());
+      console.log("updateeeeeeed" + JSON.stringify(d));
       var ids = [];
       angular.forEach($scope.oldItems, function (v, k) {
         ids.push(v.id);
@@ -65,9 +68,8 @@ angular.module('gCom.controller').controller('AddSaleDeliveryController', functi
              //v.quantite += (oldItem.quantite - v.quantite);
           }*/
           lignes.push(v);
+          });
 
-
-        });
         DBService.bcreate('LigneVente', lignes).then(function (dd) {
           //ctrl.hookAddSuccessCompletion();   
           var promises = [];
@@ -81,6 +83,19 @@ angular.module('gCom.controller').controller('AddSaleDeliveryController', functi
             $scope.oldItems = $scope.item.items;
 
           });
+          console.log("d + " + JSON.stringify(d[1][0]));
+          console.log("client id: " + d[1][0].ClientId);
+          DBService.getById('Client',d[1][0].ClientId).then(function(cl){
+            console.log("got client" + cl);
+            let newSolde = cl.solde + oldSomme - newSomme;
+            DBService.update("Client",{solde : newSolde}, d[1][0].ClientId).then(()=>{
+              var message = 'Solde client mis à jour avec succés!';
+              var id = Flash.create('success', message, 0, { class: 'custom-class', id: 'custom-id' }, true);
+              $scope.$apply();
+            });
+          });
+
+
         });
 
       });
@@ -122,7 +137,8 @@ angular.module('gCom.controller').controller('AddSaleDeliveryController', functi
           $scope.oldItems.push(iii);
 
         });
-
+        $scope.item.oldSomme = $scope.item.somme;
+        console.log("old sommmmmmmmmme", $scope.item.oldSomme);
         console.log("newwwwww item" + angular.toJson($scope.item));
       }
       else {
@@ -130,7 +146,8 @@ angular.module('gCom.controller').controller('AddSaleDeliveryController', functi
         $scope.item = {
           reference: $scope.item.reference,
           items: [],
-          oldItems: []
+          oldItems: [],
+          oldSomme: 0,
         }
       }
       $scope.active = true;
@@ -185,7 +202,10 @@ angular.module('gCom.controller').controller('AddSaleDeliveryController', functi
   ctrl.init = function () {
     $scope.oldItems = [];
     $scope.active = true;
+
     base.init();
+    //$scope.item.oldSomme = $scope.item.somme;
+    //console.log("old sommmmmmmmmme", $scope.item.oldSomme);
   }
   ctrl.init();
 
